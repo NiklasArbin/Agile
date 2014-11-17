@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Agile.Domain.Model
+namespace Agile.Domain.Model.Entity
 {
     public class State :DomainModel, IHaveATitle, IComparer<State>
     {
