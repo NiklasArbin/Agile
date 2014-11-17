@@ -2,7 +2,7 @@
 
 namespace Agile.Domain.Model
 {
-    public class Board : IHaveATitle
+    public class Board :DomainModel, IHaveATitle
     {
         public string Title { get; set; }
         public SortedSet<State> States { get; set; }

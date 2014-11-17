@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
+    <Compile Include="DomainModel.cs" />
     <Compile Include="State.cs" />
     <Compile Include="IHaveATitle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@
 
 namespace Agile.Domain.Model
 {
-    public class State : IHaveATitle, IComparer<State>
+    public class State :DomainModel, IHaveATitle, IComparer<State>
     {
         public State()
         {

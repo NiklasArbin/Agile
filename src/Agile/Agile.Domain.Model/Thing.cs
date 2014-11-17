@@ -2,7 +2,7 @@
 
 namespace Agile.Domain.Model
 {
-    public class Thing : IHaveATitle, IComparer<Thing>
+    public class Thing : DomainModel, IHaveATitle, IComparer<Thing>
     {
         public Thing()
         {
