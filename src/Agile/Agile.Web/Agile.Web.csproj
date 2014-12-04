@@ -195,6 +195,7 @@
     <Content Include="App\Ctrl\boardCtrl.js" />
     <Content Include="App\main.js" />
     <Content Include="App\Service\boardService.js" />
+    <Content Include="Content\board.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\toastr.css" />
@@ -249,7 +250,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Agile.View.Model\Agile.View.Model.csproj">

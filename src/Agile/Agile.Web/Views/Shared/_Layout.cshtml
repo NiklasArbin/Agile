@@ -5,18 +5,11 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
     <link href="~/Content/toastr.css" rel="stylesheet" />
+    <link href="~/Content/board.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <style>
-        .colStyle {
-            margin-right: 10px;
-            width: 24%;
-            padding-top: 10px;
-            margin-top: 20px;
-            border: 1px solid orange;
-            min-height: 500px;
-        }
-
         .busyIndicator .alert {
             left: 40%;
             top: 5%;
@@ -67,12 +60,8 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div>
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

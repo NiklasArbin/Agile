@@ -33,6 +33,31 @@ namespace Agile.Web.Controllers
                         new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
                     }
                 
+                },
+                new Column
+                {
+                    Id = 3, Description = "Desc", Name = "Testing",
+                    Tasks = new List<Task>
+                    {
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                    }
+                
+                },
+                new Column
+                {
+                    Id = 4, Description = "Desc", Name = "Done",
+                    Tasks = new List<Task>
+                    {
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                    }
+                },
+                new Column
+                {
+                    Id = 4, Description = "Desc", Name = "Done",
+                    Tasks = new List<Task>
+                    {
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                    }
                 }
             };
             response.Content = new StringContent(JsonConvert.SerializeObject(columns));
