@@ -4,74 +4,28 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/Content/css")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
-    <link href="~/Content/toastr.css" rel="stylesheet" />
-    <link href="~/Content/board.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <style>
-        .busyIndicator .alert {
-            left: 40%;
-            top: 5%;
-            position: fixed;
-            z-index: 1050;
-            width: 400px;
-            height: 40px;
-            padding-left: 10px;
-            padding-top: 10px;
-            background-color: lightgreen;
-            color: black;
-            border-color: transparent;
-        }
-
-        .busyIndicator .backgroundMask {
-            top: 0;
-            left: 0;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            opacity: 0.5;
-            background: black;
-            z-index: 1049;
-        }
-
-        .over {
-            background-color: #fff;
-            border: 2px dashed red;
-        }
-    </style>
-
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/bower_components/angular-material/angular-material.css">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
-                </ul>
-            </div>
-        </div>
-    </div>
     <div>
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
-    <script src="~/Scripts/angular.js"></script>
     <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
-    <script src="~/Scripts/toastr.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-aria/angular-aria.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/hammerjs/hammer.js"></script>
+    <script src="/bower_components/angular-material/angular-material.js"></script>
 
     <script src="~/App/main.js"></script>
     <script src="~/App/boardDragDrop.js"></script>
     <script src="~/App/Service/boardService.js"></script>
     <script src="~/App/Ctrl/boardCtrl.js"></script>
+
 </body>
 </html>
