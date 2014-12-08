@@ -12,13 +12,7 @@
 }
 
 .swimlane {
-    padding-top: 10px;
-    margin-top: 20px;
-    margin-right: 10px;
-    border: 1px solid blue;
-    min-height: 500px;
-    height: 100%;
-    flex-shrink: 0;
+    margin-right: 5px;
 }
 
 .card {

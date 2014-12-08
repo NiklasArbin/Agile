@@ -2,26 +2,21 @@
     ViewBag.Title = "Index";
 }
 
-<div style="width:80%; margin: 0 auto 0 auto;">
+<div ng-controller="boardCtrl">
+    @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
+    <md-content>
+        <div layout="row">
+            <div id="{{col.Id}}" class="swimlane" flex kanban-board-drop="over" ng-repeat="col in columns">
+                <md-toolbar>
+                    <span>{{col.Name}}</span>
+                </md-toolbar>
 
-    <div class="board" ng-controller="boardCtrl">
-
-        @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
-
-
-        <div class="swimlane" id="{{col.Id}}" kanban-board-drop="over" ng-repeat="col in columns">
-            <div class="panel-heading" style="margin-bottom: 10px;">
-                <h3 class="panel-title">{{col.Name}}</h3>
-            </div>
-            <div class="thumbnail" draggable="true" kanban-board-dragg="task" ng-repeat="task in col.Tasks" style="margin-bottom: 10px;">
-                <div class="caption card">
-                    <h5><strong>{{task.Name}}</strong></h5>
+                <md-card draggable="true" ng-repeat="task in col.Tasks">
+                    <h3>{{task.Name}}</h3>
+                    <md-subheader>#1234</md-subheader>
                     <p>{{task.Description}}</p>
-                    <p><a href="#" class="btn btn-primary btn-sm" role="button">Edit</a></p>
-                </div>
+                </md-card>
             </div>
-
         </div>
-    </div>
-
+    </md-content>
 </div>
