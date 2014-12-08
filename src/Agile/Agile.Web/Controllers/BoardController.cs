@@ -21,6 +21,7 @@ namespace Agile.Web.Controllers
                     Id = 1, Description = "Desc", Name = "Open",
                     Tasks = new List<Task>
                     {
+                        new Task{ColumnId = 1, Description = "Lorizzle ipsizzle dolor own yo' amizzle, consectetizzle adipiscing bow wow wow. Pot velizzle, boom shackalack volutpizzle, dawg gizzle, da bomb vizzle, arcu. Pellentesque izzle tortizzle. You son of a bizzle eros. Shizzle my nizzle crocodizzle crunk dolizzle fo shizzle tempus tempor. Mauris pellentesque nibh et turpizzle. Vestibulum izzle .", Id = 1, Name = "Task 1"},
                         new Task{ColumnId = 1, Description = "Lorizzle ipsizzle dolor own yo' amizzle, consectetizzle adipiscing bow wow wow. Pot velizzle, boom shackalack volutpizzle, dawg gizzle, da bomb vizzle, arcu. Pellentesque izzle tortizzle. You son of a bizzle eros. Shizzle my nizzle crocodizzle crunk dolizzle fo shizzle tempus tempor. Mauris pellentesque nibh et turpizzle. Vestibulum izzle .", Id = 1, Name = "Task 1"}
                     }
                 
