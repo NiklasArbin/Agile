@@ -6,31 +6,35 @@
     @*<div ng-include="'/AppScript/busyModal.html'" ng-show="isLoading"></div>*@
     <md-content>
         <div layout="row">
-            <div id="{{col.Id}}" class="swimlane" flex kanban-board-drop="over" ng-repeat="col in columns">
-                <md-toolbar>
-                    <span>{{col.Name}}</span>
-                </md-toolbar>
-                
+            
+                <div id="{{col.Id}}" class="swimlane md-whiteframe-z1" flex kanban-board-drop="over" ng-repeat="col in columns">
+                    <md-toolbar>
+                        <span class="md-toolbar-tools">{{col.Name}}</span>
+                    </md-toolbar>
 
-                <md-card md-theme="red" class="card" draggable="true" ng-repeat="task in col.Tasks">
-                    <h4>{{task.Name}}</h4>
-                    <md-subheader>#1234</md-subheader>
-                    <p>{{task.Description}}</p>
-                    <md-divider />
-                    <div layout="row" layout-align="space-between center">
-                        <span>One</span>
-                        <span>Two</span>
-                        <span>Three</span>
-                    </div>
-                    <div layout="row" layout-align="space-between center">
-                        <span>One</span>
-                        <span>Two</span>
-                        <span>Three</span>
-                        <span>Four</span>
-                    </div>
-                    <md-progress-linear md-mode="determinate" ng-value="66"></md-progress-linear>
-                </md-card>
-            </div>
+
+
+                    <md-card class="card" draggable="true" ng-repeat="task in col.Tasks">
+                        <h4>{{task.Name}}</h4>
+                        <md-subheader>#1234</md-subheader>
+                        <p>{{task.Description}}</p>
+                        <md-divider />
+                        <div layout="row" layout-align="space-between center">
+                            <span>One</span>
+                            <span>Two</span>
+                            <span>Three</span>
+                        </div>
+                        <div layout="row" layout-align="space-between center">
+                            <span>One</span>
+                            <span>Two</span>
+                            <span>Three</span>
+                            <span>Four</span>
+                        </div>
+                        <md-progress-linear md-mode="determinate" ng-value="66"></md-progress-linear>
+                    </md-card>
+
+                </div>
+            
         </div>
     </md-content>
 </div>
