@@ -12,23 +12,10 @@
 }
 
 .swimlane {
-    padding-top: 10px;
-    margin-top: 20px;
     margin-right: 10px;
-    border: 1px solid blue;
-    min-height: 500px;
-    height: 100%;
-    flex-shrink: 0;
 }
 
 .card {
-    background: tomato;
-    padding: 5px;
-    width: 300px;
-    height: 150px;
-    margin-top: 10px;
-    color: white;
-    font-weight: bold;
-    font-size: 3em;
-    text-align: center;
+    border-left-width: 2px;
+    border-left-color: red;
 }
