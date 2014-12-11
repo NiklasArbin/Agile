@@ -38,7 +38,7 @@ namespace Agile.View.Repository
                     Id = 3, Description = "Desc", Name = "Testing",
                     Tasks = new List<Task>
                     {
-                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 4"}
                     }
                 
                 },
@@ -47,7 +47,7 @@ namespace Agile.View.Repository
                     Id = 4, Description = "Desc", Name = "Completed",
                     Tasks = new List<Task>
                     {
-                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 5"}
                     }
                 },
                 new Column
@@ -55,7 +55,7 @@ namespace Agile.View.Repository
                     Id = 4, Description = "Desc", Name = "Closed",
                     Tasks = new List<Task>
                     {
-                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 6"}
                     }
                 }
             };
