@@ -20,7 +20,7 @@ namespace Agile.View.Repository
                     Tasks = new List<Task>
                     {
                         new Task{ColumnId = 1, Description = "Lorizzle ipsizzle dolor own yo' amizzle, consectetizzle adipiscing bow wow wow. Pot velizzle, boom shackalack volutpizzle, dawg gizzle, da bomb vizzle, arcu. Pellentesque izzle tortizzle. You son of a bizzle eros. Shizzle my nizzle crocodizzle crunk dolizzle fo shizzle tempus tempor. Mauris pellentesque nibh et turpizzle. Vestibulum izzle .", Id = 1, Name = "Task 1"},
-                        new Task{ColumnId = 1, Description = "Lorizzle ipsizzle dolor own yo' amizzle, consectetizzle adipiscing bow wow wow. Pot velizzle, boom shackalack volutpizzle, dawg gizzle, da bomb vizzle, arcu. Pellentesque izzle tortizzle. You son of a bizzle eros. Shizzle my nizzle crocodizzle crunk dolizzle fo shizzle tempus tempor. Mauris pellentesque nibh et turpizzle. Vestibulum izzle .", Id = 1, Name = "Task 1"}
+                        new Task{ColumnId = 1, Description = "Lorizzle ipsizzle dolor own yo' amizzle, consectetizzle adipiscing bow wow wow. Pot velizzle, boom shackalack volutpizzle, dawg gizzle, da bomb vizzle, arcu. Pellentesque izzle tortizzle. You son of a bizzle eros. Shizzle my nizzle crocodizzle crunk dolizzle fo shizzle tempus tempor. Mauris pellentesque nibh et turpizzle. Vestibulum izzle .", Id = 1, Name = "Task 2"}
                     }
                 
                 },
@@ -29,7 +29,7 @@ namespace Agile.View.Repository
                     Id = 2, Description = "Desc", Name = "In Progress",
                     Tasks = new List<Task>
                     {
-                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 1"}
+                        new Task{ColumnId = 2, Description = "TD", Id = 2, Name = "Task 3"}
                     }
                 
                 },
