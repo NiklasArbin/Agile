@@ -1,6 +1,6 @@
 {
   "name": "Agile",
   "dependencies": {
-    "angular-material": "0.6.0"
+    "angular-material": "0.6.1"
   }
 }
