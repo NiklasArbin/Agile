@@ -1,4 +1,4 @@
-﻿agile.kanbanBoardApp.controller('boardCtrl', function ($scope, $mdToast, boardService) {
+﻿agile.kanbanBoardApp.controller('boardCtrl', function ($scope, $mdToast, $mdDialog, boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
@@ -33,6 +33,31 @@
 
             }, onError);
     };
+
+    $scope.editCard = function editCard(ev) {
+        $mdDialog.show({
+            controller: CardController, 
+            templateUrl: '/App/Templates/EditCard.html',
+            targetEvent: ev,
+        })
+    .then(function (answer) {
+        $scope.alert = 'You said the information was "' + answer + '".';
+    }, function () {
+        $scope.alert = 'You cancelled the dialog.';
+    });
+    }
+
+    function CardController($scope, $mdDialog) {
+        $scope.hide = function () {
+            $mdDialog.hide();
+        };
+        $scope.cancel = function () {
+            $mdDialog.cancel();
+        };
+        $scope.answer = function (answer) {
+            $mdDialog.hide(answer);
+        };
+    }
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
