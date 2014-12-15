@@ -8,7 +8,11 @@
             });
 
             element.bind('dragstart', function (event) {
+                element.addClass('dragged');
                 event.originalEvent.dataTransfer.setData("Text", JSON.stringify(dragData));
+            });
+            element.bind('dragend', function(event) {
+                element.removeClass('dragged');
             });
         }
     };
