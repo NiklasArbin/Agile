@@ -1,4 +1,4 @@
-﻿agile.kanbanBoardApp.controller('boardCtrl', function ($scope, boardService) {
+﻿agile.kanbanBoardApp.controller('boardCtrl', function ($scope, $mdToast, boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
@@ -37,12 +37,12 @@
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
         $scope.refreshBoard();
-        toastr.success("Board updated successfully", "Success");
+        $mdToast.show($mdToast.simple().content('Board updated successfully'));
     });
 
     var onError = function (errorMessage) {
         $scope.isLoading = false;
-        toastr.error(errorMessage, "Error");
+        $mdToast.show($mdToast.simple().content('Error'));
     };
 
     init();
