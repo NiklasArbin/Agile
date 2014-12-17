@@ -46,8 +46,9 @@ namespace Agile.Web.Controllers
         public HttpResponseMessage MoveTask(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-            //var repo = new BoardRepository();
-            //repo.MoveTask((int)json.taskId, (int)json.targetColId);
+            
+            _boardRepository.MoveTask((int)json.taskId, (int)json.targetColId);
+
 
             var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;
