@@ -39,7 +39,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bug.cs" />
+    <Compile Include="Epic.cs" />
+    <Compile Include="Feature.cs" />
+    <Compile Include="Impediment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sprint.cs" />
     <Compile Include="Task.cs" />
     <Compile Include="UserStory.cs" />
   </ItemGroup>
