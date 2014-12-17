@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Agile.Domain.Model
 {
-    public class UserStory : IDescribed
+
+    public interface IAggregateRoot
+    {
+        int Id { get; set; }        
+    }
+    public class UserStory : IDescribed, IAggregateRoot
     {
         public UserStory()
         { 
