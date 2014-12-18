@@ -32,13 +32,7 @@ namespace StyrBoard.Web.Controllers
         {
             var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;
-            response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = false }));
-
-            if (sourceColId == (targetColId - 1))
-            {
-                response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = true }));
-            }
-
+            response.Content = new StringContent(JsonConvert.SerializeObject(new { canMove = true }));
             return response;
         }
 
@@ -46,7 +40,7 @@ namespace StyrBoard.Web.Controllers
         public HttpResponseMessage MoveTask(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-            
+
             _boardRepository.MoveTask((int)json.taskId, (int)json.targetColId);
 
 
