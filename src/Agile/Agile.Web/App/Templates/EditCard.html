@@ -1,9 +1,8 @@
 ﻿<md-dialog>
-    <md-content>
-
+    <md-content class="card-edit">
         <div layout="row">
             <div flex>
-                <md-text-float type="text" label="Title" style="width:80%" ng-model="task.Name"> </md-text-float>
+                <md-text-float class="title" type="text" label="Title" ng-model="task.Name"> </md-text-float>
                 <textarea name="Body" cols="200" rows="30">{{task.Description}}</textarea>
             </div>
         </div>
