@@ -18,6 +18,7 @@
                 <h4>{{task.Name}}</h4>
                 <md-subheader>#1234</md-subheader>
                 <p>{{task.Description}}</p>
+                <md-button class="md-raised" ng-click="editCard($event, task.Id)">Button</md-button>
                 <md-divider />
                 <div layout="row" layout-align="space-between center">
                     <span>One</span>
