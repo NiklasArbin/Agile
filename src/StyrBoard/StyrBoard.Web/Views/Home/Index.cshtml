@@ -14,24 +14,22 @@
                 <span class="md-toolbar-tools">{{col.Name}}</span>
             </md-toolbar>
 
-            <md-card class="card" draggable="true" kanban-board-dragg="task" ng-repeat="task in col.Tasks">
+            <md-card class="card" draggable="true" kanban-board-dragg="task" ng-repeat="task in col.Tasks" ng-dblclick="editCard($event, task.Id)">
                 <div layout="row">
                     <div>
                         <h4>{{task.Name}}</h4>
                     </div>
                     <span flex></span>
                     <md-subheader>#{{task.Id}}</md-subheader>
-                    
+
                 </div>
                 <div layout="column">
-                    <md-content>{{task.Description}}</md-content>    
+                    <md-content>{{task.Description | limitTo:255}}</md-content>
                 </div>
                 <div layout="row">
                     <span flex></span>
                     <md-button class="md-primary" ng-click="editCard($event, task.Id)">Open</md-button>
                 </div>
-                
-                
                 <md-divider />
                 <div layout="row" layout-align="space-between center">
                     <span>One</span>
