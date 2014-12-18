@@ -1,2 +1,2 @@
 ﻿var agile = agile || {};
-agile.kanbanBoardApp = angular.module('kanbanBoardApp', ['ngMaterial']);
+agile.kanbanBoardApp = angular.module('kanbanBoardApp', ['ngMaterial', 'ui.sortable']);

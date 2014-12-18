@@ -11,6 +11,26 @@
         }, onError);
     };
 
+    $scope.dragControlListeners = {
+        //accept: function (sourceItemHandleScope, destSortableScope) {
+        //    return true;
+
+        //},
+        itemMoved: function(event) {
+            console.log('source ' +event.source.index);
+            console.log('dest ' + event.dest.index);
+            var taskId = event.source.itemScope.modelValue.Id;
+            var targetColumnId = event.dest.sortableScope.$parent.col.Id;
+            boardService.moveTask(taskId, targetColumnId).then(function (taskMoved) {
+                $scope.isLoading = false;
+                boardService.sendRequest();
+            }, onError);
+            $scope.isLoading = true;
+        },
+        //orderChanged: function (event) { },
+        //containment: '#board'//optional param.
+    };
+
     $scope.refreshBoard = function refreshBoard() {
         $scope.isLoading = true;
         boardService.getColumns()
@@ -20,20 +40,6 @@
            }, onError);
     };
 
-    $scope.onDrop = function (data, targetColId) {
-        boardService.canMoveTask(data.ColumnId, targetColId)
-            .then(function (canMove) {
-                if (canMove) {
-                    boardService.moveTask(data.Id, targetColId).then(function (taskMoved) {
-                        $scope.isLoading = false;
-                        boardService.sendRequest();
-                    }, onError);
-                    $scope.isLoading = true;
-                }
-
-            }, onError);
-    };
-
     $scope.editCard = function editCard(ev, taskId) {
         $mdDialog.show({
             controller: CardController,
@@ -41,10 +47,10 @@
             targetEvent: ev,
             locals: { taskId: taskId }
         })
-            .then(function() {
+            .then(function () {
                 boardService.sendRequest();
-            }, function() {
-                
+            }, function () {
+
             });
     };
 
@@ -65,8 +71,8 @@
             $scope.task = data;
         }, onError);
 
-            
-        
+
+
     }
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
