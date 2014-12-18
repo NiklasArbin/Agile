@@ -8,6 +8,7 @@ namespace Agile.View.Repository
     {
         List<Column> GetColumns();
         void MoveTask(int taskId, int targetColId);
+        Task GetTask(int taskId);
     }
 
     public class BoardRepository : IBoardRepository
@@ -67,6 +68,11 @@ namespace Agile.View.Repository
             };
             _columns = columns;
             return columns;
+        }
+
+        public Task GetTask(int taskId)
+        {
+            return _columns.Single(c => c.Tasks.Exists(t => t.Id == taskId)).Tasks.Single(t => t.Id == taskId);
         }
 
         public void MoveTask(int taskId, int targetColId)

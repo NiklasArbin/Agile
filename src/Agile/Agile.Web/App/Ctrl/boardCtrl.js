@@ -34,12 +34,13 @@
             }, onError);
     };
 
-    $scope.editCard = function editCard(ev) {
+    $scope.editCard = function editCard(ev, taskId) {
         $mdDialog.show({
             controller: CardController, 
             templateUrl: '/App/Templates/EditCard.html',
             targetEvent: ev,
-        })
+            locals: { taskId: taskId }
+            })
     .then(function (answer) {
         $scope.alert = 'You said the information was "' + answer + '".';
     }, function () {
@@ -47,7 +48,8 @@
     });
     }
 
-    function CardController($scope, $mdDialog) {
+    function CardController($scope, $mdDialog, $http, taskId, taskService) {
+
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -57,6 +59,13 @@
         $scope.answer = function (answer) {
             $mdDialog.hide(answer);
         };
+
+        taskService.getTask(taskId).then(function (data) {
+            $scope.task = data;
+        }, onError);;
+
+            
+        
     }
 
     // Listen to the 'refreshBoard' event and refresh the board as a result

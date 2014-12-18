@@ -184,6 +184,7 @@
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HubController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -203,6 +204,7 @@
     <Content Include="App\boardDragDrop.js" />
     <Content Include="App\Ctrl\boardCtrl.js" />
     <Content Include="App\main.js" />
+    <Content Include="App\Service\taskService.js" />
     <Content Include="App\Service\boardService.js" />
     <Content Include="App\Templates\EditCard.html" />
     <Content Include="bower_components\angular-animate\angular-animate.js" />
