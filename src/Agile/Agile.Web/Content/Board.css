@@ -27,7 +27,6 @@
 
     .card-edit .title {
         font-size: 18px;
-        font-weight: bold
     }
 /* Prevent the text contents of draggable elements from being selectable. */
 [draggable] {
