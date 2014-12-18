@@ -36,17 +36,17 @@
 
     $scope.editCard = function editCard(ev, taskId) {
         $mdDialog.show({
-            controller: CardController, 
+            controller: CardController,
             templateUrl: '/App/Templates/EditCard.html',
             targetEvent: ev,
             locals: { taskId: taskId }
-            })
-    .then(function (answer) {
-        $scope.alert = 'You said the information was "' + answer + '".';
-    }, function () {
-        $scope.alert = 'You cancelled the dialog.';
-    });
-    }
+        })
+            .then(function() {
+                boardService.sendRequest();
+            }, function() {
+                
+            });
+    };
 
     function CardController($scope, $mdDialog, $http, taskId, taskService) {
 
@@ -56,13 +56,14 @@
         $scope.cancel = function () {
             $mdDialog.cancel();
         };
-        $scope.answer = function (answer) {
-            $mdDialog.hide(answer);
+        $scope.save = function (task) {
+            taskService.saveTask(task);
+            $mdDialog.hide(task);
         };
 
         taskService.getTask(taskId).then(function (data) {
             $scope.task = data;
-        }, onError);;
+        }, onError);
 
             
         

@@ -3,19 +3,16 @@
         <div layout="row">
             <div flex>
                 <md-text-float class="title" type="text" label="Title" ng-model="task.Name"> </md-text-float>
-                <textarea name="Body" cols="200" rows="30">{{task.Description}}</textarea>
+                <textarea cols="200" rows="30" ng-model="task.Description"></textarea>
             </div>
         </div>
         <div class="md-actions" layout="row">
-            <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" hide show-md>
-                More on Wikipedia
-            </md-button>
             <span flex></span>
-            <md-button ng-click="answer('not useful')">
-                Not Useful
+            <md-button ng-click="cancel()">
+                Cancel
             </md-button>
-            <md-button ng-click="answer('useful')" class="md-primary">
-                Useful
+            <md-button ng-click="save(task)" class="md-primary">
+                Save
             </md-button>
         </div>
 
