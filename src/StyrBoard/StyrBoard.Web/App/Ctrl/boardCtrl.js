@@ -72,12 +72,16 @@
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
         $scope.refreshBoard();
-        $mdToast.show($mdToast.simple().content('Board updated successfully'));
+        $mdToast.show(
+            $mdToast.simple()
+            .content('Board updated successfully')
+            .position('right')
+            );
     });
 
     var onError = function (errorMessage) {
         $scope.isLoading = false;
-        $mdToast.show($mdToast.simple().content('Error'));
+        $mdToast.show($mdToast.simple().content('Error').position('right'));
     };
 
     init();
