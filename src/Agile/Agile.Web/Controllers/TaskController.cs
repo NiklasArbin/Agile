@@ -4,8 +4,10 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Agile.View.Model;
 using Agile.View.Repository;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Agile.Web.Controllers
 {
@@ -40,8 +42,13 @@ namespace Agile.Web.Controllers
         }
 
         // PUT: api/Task/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, JObject value)
         {
+            var task = JsonConvert.DeserializeObject<Task>(value.ToString());
+            var taskToUpdate = _boardRepository.GetTask(id);
+            taskToUpdate.ColumnId = task.ColumnId;
+            taskToUpdate.Description = task.Description;
+            taskToUpdate.Name = task.Name;
         }
 
         // DELETE: api/Task/5

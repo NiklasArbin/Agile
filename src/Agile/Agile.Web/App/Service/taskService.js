@@ -1,12 +1,21 @@
 ﻿agile.kanbanBoardApp.service('taskService', function ($http, $q, $rootScope) {
-    var getTask = function (id) {
-        return $http.get("/api/Task/" + id).then(function (response) {
+    var getTask = function(id) {
+        return $http.get("/api/Task/" + id).then(function(response) {
             return response.data;
-        }, function (error) {
+        }, function(error) {
             return $q.reject(error.data.Message);
         });
-    }
+    };
+    var saveTask = function (task) {
+        return $http.put("/api/Task/" + task.Id, task )
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+    };
     return {
-        getTask: getTask
+        getTask: getTask,
+        saveTask: saveTask
     };
 });
