@@ -115,6 +115,12 @@
             $mdDialog.hide(task);
         };
 
+        $scope.delete = function (id) {
+            taskService.deleteTask(id);
+            boardService.notifyCardUpdated(id);
+            $mdDialog.hide(task);
+        };
+
         //taskService.getTask(taskId).then(function (data) {
         //    $scope.task = data;
         //}, onError);

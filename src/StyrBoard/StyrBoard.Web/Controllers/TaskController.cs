@@ -52,6 +52,7 @@ namespace StyrBoard.Web.Controllers
         // DELETE: api/Task/5
         public void Delete(int id)
         {
+            _boardRepository.DeleteTask(id);
         }
     }
 }

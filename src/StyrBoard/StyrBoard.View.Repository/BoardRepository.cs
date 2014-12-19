@@ -9,6 +9,7 @@ namespace StyrBoard.View.Repository
         List<Column> GetColumns();
         void MoveTask(int taskId, int targetColId);
         Task GetTask(int taskId);
+        void DeleteTask(int taskId);
     }
 
     public class BoardRepository : IBoardRepository
@@ -73,6 +74,12 @@ namespace StyrBoard.View.Repository
         public Task GetTask(int taskId)
         {
             return _columns.Single(c => c.Tasks.Exists(t => t.Id == taskId)).Tasks.Single(t => t.Id == taskId);
+        }
+
+        public void DeleteTask(int taskId)
+        {
+            var column = _columns.Single(c => c.Tasks.Exists(t => t.Id == taskId));
+            column.Tasks.RemoveAll(t => t.Id == taskId);
         }
 
         public void MoveTask(int taskId, int targetColId)

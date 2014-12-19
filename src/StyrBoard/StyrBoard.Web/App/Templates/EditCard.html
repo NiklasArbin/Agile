@@ -7,7 +7,10 @@
             </div>
         </div>
         <div class="md-actions" layout="row">
-            <span flex></span>
+            <md-button ng-click="delete(task.Id)" class="md-warn">
+                Delete
+            </md-button>
+            <span flex></span>            
             <md-button ng-click="cancel()">
                 Cancel
             </md-button>
