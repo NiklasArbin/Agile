@@ -41,6 +41,10 @@
             $rootScope.$emit("cardUpdated", card);
         });
 
+        this.proxy.on('CardDeleted', function (id) {
+            $rootScope.$emit("cardDeleted", id);
+        });
+
         // Connecting to SignalR server        
         return connection.start()
         .then(function (connectionObj) {
@@ -58,11 +62,15 @@
     var notifyCardUpdated = function (taskId) {
         this.proxy.invoke('NotifyCardUpdated', taskId);
     };
-
+    var notifyCardDeleted = function (taskId) {
+        this.proxy.invoke('NotifyCardDeleted', taskId);
+    };
+    
     return {
         initialize: initialize,
         sendRequest: sendRequest,
         notifyCardUpdated: notifyCardUpdated,
+        notifyCardDeleted: notifyCardDeleted,
         getColumns: getColumns,
         canMoveTask: canMoveTask,
         moveTask: moveTask

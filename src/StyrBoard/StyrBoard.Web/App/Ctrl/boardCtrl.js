@@ -66,7 +66,12 @@
             }
         }
     };
-
+    $scope.deleteCard = function (id) {
+        var currentCard = $scope.getCardById(id);
+        var columnIndex = $scope.getColumnIndexById(currentCard.ColumnId);
+        var cardIndex = $scope.getCardIndexById(id);
+        $scope.columns[columnIndex].Tasks.splice(cardIndex, 1);
+    }
     $scope.updateCard = function(card) {
         var currentCard = $scope.getCardById(card.Id);
         if (card.ColumnId !== currentCard.ColumnId) {
@@ -93,7 +98,11 @@
             targetEvent: ev,
             locals: { card: card }
         })
-            .then(function () {
+            .then(function (action) {
+                if (action === 'delete') {
+                    $scope.deleteCard(card.Id);
+                    toast('Card deleted successfully');
+                }
                 
             }, function () {
 
@@ -112,13 +121,13 @@
         $scope.save = function (task) {
             taskService.saveTask(task);
             boardService.notifyCardUpdated(task.Id);
-            $mdDialog.hide(task);
+            $mdDialog.hide();
         };
 
         $scope.delete = function (id) {
             taskService.deleteTask(id);
-            boardService.notifyCardUpdated(id);
-            $mdDialog.hide(task);
+            boardService.notifyCardDeleted(id);
+            $mdDialog.hide('delete');
         };
 
         //taskService.getTask(taskId).then(function (data) {
@@ -139,6 +148,12 @@
     $scope.$parent.$on("cardUpdated", function (evt, card) {
         $scope.updateCard(card);
         toast('Card updated successfully');
+    });
+
+    // Listen to the 'deleteCard' event and delete the card as a result
+    $scope.$parent.$on("cardDeleted", function (evt, id) {
+        $scope.deleteCard(id);
+        toast('Card deleted successfully');
     });
 
     var toast = function(message) {
