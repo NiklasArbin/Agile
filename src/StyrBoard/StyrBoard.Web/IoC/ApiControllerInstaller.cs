@@ -14,6 +14,11 @@ namespace StyrBoard.Web.IoC
                 .BasedOn<IHttpController>()
                 .LifestyleTransient()
                 );
+            //container.Register(
+            //    Classes.FromAssemblyContaining<Raven.Database.Server.Controllers.BuildController>()
+            //    .BasedOn<IHttpController>()
+            //    .LifestyleTransient()
+            //    );
         }
     }
 }

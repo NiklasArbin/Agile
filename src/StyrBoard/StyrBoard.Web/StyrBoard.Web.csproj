@@ -200,6 +200,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\ApiControllerInstaller.cs" />
+    <Compile Include="IoC\DatabaseInstaller.cs" />
+    <Compile Include="IoC\DomainRepositoryInstaller.cs" />
     <Compile Include="IoC\ViewRepositoryInstaller.cs" />
     <Compile Include="IoC\WindsorCompositionRoot.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
@@ -577,6 +579,14 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StyrBoard.Domain.Model\StyrBoard.Domain.Model.csproj">
+      <Project>{507D9B12-AB6B-4559-AAD7-166AE386E62C}</Project>
+      <Name>StyrBoard.Domain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StyrBoard.Domain.Repository\StyrBoard.Domain.Repository.csproj">
+      <Project>{CDD70048-22D9-4FCF-AFBA-7618BCAABFBB}</Project>
+      <Name>StyrBoard.Domain.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StyrBoard.View.Model\StyrBoard.View.Model.csproj">
       <Project>{b0916a81-ad96-4871-b3f1-00df4b7a6517}</Project>
       <Name>StyrBoard.View.Model</Name>

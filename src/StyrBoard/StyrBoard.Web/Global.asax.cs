@@ -16,7 +16,7 @@ namespace StyrBoard.Web
         public WebApiApplication()
         {
             _container = new WindsorContainer();
-            _container.Install(FromAssembly.This());
+            
         }
         protected void Application_Start()
         {
@@ -26,6 +26,8 @@ namespace StyrBoard.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            _container.Install(FromAssembly.This());
         }
 
         public override void Dispose()
