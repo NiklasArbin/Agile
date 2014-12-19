@@ -24,7 +24,12 @@ namespace StyrBoard.Web.Controllers
         public void NotifyCardUpdated(int taskId)
         {
             var task = _boardRepository.GetTask(taskId);
-            Clients.AllExcept(new []{Context.ConnectionId}).CardUpdated(task);
+            Clients.AllExcept(new[] { Context.ConnectionId }).CardUpdated(task);
+        }
+
+        public void NotifyCardDeleted(int taskId)
+        {
+            Clients.AllExcept(new[] { Context.ConnectionId }).CardDeleted(taskId);
         }
     }
 }

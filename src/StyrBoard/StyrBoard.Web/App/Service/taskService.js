@@ -14,8 +14,17 @@
                 return $q.reject(error.data.Message);
             });
     };
+    var deleteTask = function (id) {
+        return $http.delete("/api/Task/" + id)
+            .then(function (response) {
+                return response.status == 200;
+            }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+    };
     return {
         getTask: getTask,
-        saveTask: saveTask
+        saveTask: saveTask,
+        deleteTask: deleteTask
     };
 });
