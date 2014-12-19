@@ -86,12 +86,12 @@
     }
     
 
-    $scope.editCard = function editCard(ev, taskId) {
+    $scope.editCard = function editCard(ev, card) {
         $mdDialog.show({
             controller: CardController,
             templateUrl: '/App/Templates/EditCard.html',
             targetEvent: ev,
-            locals: { taskId: taskId }
+            locals: { card: card }
         })
             .then(function () {
                 
@@ -100,8 +100,9 @@
             });
     };
 
-    function CardController($scope, $mdDialog, $http, taskId, taskService) {
+    function CardController($scope, $mdDialog, $http, taskService, card) {
 
+        $scope.task = card;
         $scope.hide = function () {
             $mdDialog.hide();
         };
@@ -110,12 +111,13 @@
         };
         $scope.save = function (task) {
             taskService.saveTask(task);
+            boardService.notifyCardUpdated(task.Id);
             $mdDialog.hide(task);
         };
 
-        taskService.getTask(taskId).then(function (data) {
-            $scope.task = data;
-        }, onError);
+        //taskService.getTask(taskId).then(function (data) {
+        //    $scope.task = data;
+        //}, onError);
 
 
 
