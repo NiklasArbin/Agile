@@ -3,8 +3,10 @@ using System.Web.Http.Dispatcher;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
+using Microsoft.AspNet.SignalR.Hubs;
 using StyrBoard.Web.IoC;
 
 namespace StyrBoard.Web
@@ -20,7 +22,12 @@ namespace StyrBoard.Web
         }
         protected void Application_Start()
         {
+            _container.Register(Classes.FromThisAssembly().BasedOn(typeof(IHub)).LifestyleTransient());
+            var signalRDependencyResolver = new SignalRDependencyResolver(_container);
+            Microsoft.AspNet.SignalR.GlobalHost.DependencyResolver = signalRDependencyResolver;   
             InstallInversionOfControlForWebApi();
+            
+
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);

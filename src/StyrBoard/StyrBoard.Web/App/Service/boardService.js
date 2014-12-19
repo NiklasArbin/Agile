@@ -37,6 +37,10 @@
             $rootScope.$emit("refreshBoard");
         });
 
+        this.proxy.on('CardUpdated', function (card) {
+            $rootScope.$emit("cardUpdated", card);
+        });
+
         // Connecting to SignalR server        
         return connection.start()
         .then(function (connectionObj) {
@@ -51,9 +55,14 @@
         this.proxy.invoke('NotifyBoardUpdated');
     };
 
+    var notifyCardUpdated = function (taskId) {
+        this.proxy.invoke('NotifyCardUpdated', taskId);
+    };
+
     return {
         initialize: initialize,
         sendRequest: sendRequest,
+        notifyCardUpdated: notifyCardUpdated,
         getColumns: getColumns,
         canMoveTask: canMoveTask,
         moveTask: moveTask

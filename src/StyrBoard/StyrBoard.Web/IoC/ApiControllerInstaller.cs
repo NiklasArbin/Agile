@@ -10,10 +10,10 @@ namespace StyrBoard.Web.IoC
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(
-                Classes.FromThisAssembly()
-                .BasedOn<IHttpController>()
+                Classes.FromThisAssembly().BasedOn<IHttpController>()
                 .LifestyleTransient()
                 );
+
         }
     }
 }

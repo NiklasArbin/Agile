@@ -10,10 +10,12 @@ namespace StyrBoard.Web.Controllers
     public class BoardController : ApiController
     {
         private readonly IBoardRepository _boardRepository;
+        
 
         public BoardController(IBoardRepository boardRepository)
         {
             _boardRepository = boardRepository;
+        
         }
 
         [HttpGet]
@@ -40,13 +42,10 @@ namespace StyrBoard.Web.Controllers
         public HttpResponseMessage MoveTask(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-
             _boardRepository.MoveTask((int)json.taskId, (int)json.targetColId);
-
 
             var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;
-
             return response;
         }
     }

@@ -1,14 +1,30 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
+using StyrBoard.View.Model;
+using StyrBoard.View.Repository;
 
 namespace StyrBoard.Web.Controllers
 {
+    
     [HubName("MainHub")]
     public class HubController : Hub
     {
+        private readonly IBoardRepository _boardRepository;
+
+        public HubController(IBoardRepository boardRepository)
+        {
+            _boardRepository = boardRepository;
+        }
+
         public void NotifyBoardUpdated()
         {
-            Clients.All.BoardUpdated();
+            Clients.AllExcept(new []{Context.ConnectionId}).BoardUpdated();
+        }
+
+        public void NotifyCardUpdated(int taskId)
+        {
+            var task = _boardRepository.GetTask(taskId);
+            Clients.AllExcept(new []{Context.ConnectionId}).CardUpdated(task);
         }
     }
 }
