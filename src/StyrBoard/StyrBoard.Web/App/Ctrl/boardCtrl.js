@@ -93,7 +93,7 @@
 
     $scope.editCard = function editCard(ev, card) {
         $mdDialog.show({
-            controller: CardController,
+            controller: 'editCardCtrl',
             templateUrl: '/App/Templates/EditCard.html',
             targetEvent: ev,
             locals: { card: card }
@@ -108,35 +108,6 @@
 
             });
     };
-
-    function CardController($scope, $mdDialog, $http, taskService, card) {
-
-        $scope.task = card;
-        $scope.hide = function () {
-            $mdDialog.hide();
-        };
-        $scope.cancel = function () {
-            $mdDialog.cancel();
-        };
-        $scope.save = function (task) {
-            taskService.saveTask(task);
-            boardService.notifyCardUpdated(task.Id);
-            $mdDialog.hide();
-        };
-
-        $scope.delete = function (id) {
-            taskService.deleteTask(id);
-            boardService.notifyCardDeleted(id);
-            $mdDialog.hide('delete');
-        };
-
-        //taskService.getTask(taskId).then(function (data) {
-        //    $scope.task = data;
-        //}, onError);
-
-
-
-    }
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {
