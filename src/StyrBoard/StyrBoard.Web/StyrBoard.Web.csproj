@@ -204,6 +204,7 @@
   <ItemGroup>
     <Content Include="App\boardDragDrop.js" />
     <Content Include="App\Ctrl\boardCtrl.js" />
+    <Content Include="App\Ctrl\menuCtrl.js" />
     <Content Include="App\main.js" />
     <Content Include="App\Service\taskService.js" />
     <Content Include="App\Service\boardService.js" />

@@ -6,13 +6,13 @@
     <title>@ViewBag.Title</title>
     @*@Styles.Render("~/Content/css")*@
     @*@Scripts.Render("~/bundles/modernizr")*@
-    
+
     <link rel="stylesheet" href="~/bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=RobotoDraft:400,500,700,400italic">
     <link href="~/Content/board.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/bower_components/ng-sortable/dist/ng-sortable.css" rel="stylesheet" />
-  
+
     <script type="text/javascript">
         var appInsights = window.appInsights || function (config) {
             function s(config) { t[config] = function () { var i = arguments; t.queue.push(function () { t[config].apply(t, i) }) } } var t = { config: config }, r = document, f = window, e = "script", o = r.createElement(e), i, u; for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;) s("track" + i.pop()); return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) { var s = u && u(config, r, f, e, o); return s !== !0 && t["_" + i](config, r, f, e, o), s }), t
@@ -25,8 +25,28 @@
     </script>
 </head>
 <body>
+    <div layout="column" layout-fill>
+        <section ng-controller="menuCtrl" layout="row" flex>
+            <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="true">
+                <md-toolbar>
+                    <h1 class="md-toolbar-tools">Menu</h1>
+                </md-toolbar>
+                <md-content class="md-padding">
+                    <div ng-repeat="menuItem in menuItems" layout="row">
+                        <md-button flex ng-href="{{menuItem.link}}">{{menuItem.title}}</md-button>
+                    </div>
+                    <p>
+                        This sidenav is locked open on your device. To go back to the default behavior,
+                        narrow your display.
+                    </p>
+                </md-content>
+            </md-sidenav>
+            <md-content class="md-padding" flex>
+                @RenderBody()
+            </md-content>
+        </section>
+    </div>
 
-    @RenderBody()
 
 
     @Scripts.Render("~/bundles/jquery")
@@ -42,6 +62,6 @@
     <script src="~/App/Service/boardService.js"></script>
     <script src="~/App/Service/taskService.js"></script>
     <script src="~/App/Ctrl/boardCtrl.js"></script>
-
+    <script src="~/App/Ctrl/menuCtrl.js"></script>
 </body>
 </html>
