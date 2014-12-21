@@ -2,48 +2,8 @@
     ViewBag.Title = "Board";
 }
 
-<div ng-controller="boardCtrl">
-    <div class="ng-cloak" layout="row">
+<div ng-view>
 
-        <div id="{{col.Id}}" class="swimlane" flex layout="column" ng-repeat="col in columns" data-columnindex="{{col.Id-1}}">
-            <md-toolbar>
-                <span class="md-toolbar-tools">{{col.Name}}</span>
-            </md-toolbar>
-            <div flex data-as-sortable="dragControlListeners" data-ng-model="col.Tasks">
-                <md-card class="card" data-as-sortable-item ng-repeat="task in col.Tasks" ng-dblclick="editCard($event, task)">
-                    <div data-as-sortable-item-handle>
-                        <div layout="row">
-                            <div>
-                                <h4>{{task.Name}}</h4>
-                            </div>
-                            <span flex></span>
-                            <md-subheader>#{{task.Id}}</md-subheader>
-                        </div>
-                        <div layout="column">
-                            <md-content>{{task.Description | limitTo:255}}</md-content>
-                        </div>
-                        <div layout="row">
-                            <span flex></span>
-                            <md-button class="md-primary" ng-click="editCard($event, task)">Open</md-button>
-                        </div>
-                        <md-divider />
-                        <div layout="row" layout-align="space-between center">
-                            <span>One</span>
-                            <span>Two</span>
-                            <span>Three</span>
-                        </div>
-                        <div layout="row" layout-align="space-between center">
-                            <span>One</span>
-                            <span>Two</span>
-                            <span>Three</span>
-                            <span>Four</span>
-                        </div>
-                        <md-progress-linear md-mode="determinate" ng-value="66"></md-progress-linear>
-                    </div>
-                </md-card>
-            </div>
-        </div>
-    </div>
     <div ng-show="isLoading" ng-cloak>
         <div layout="row" layout-align="space-around center">
             <md-progress-circular md-mode="indeterminate"></md-progress-circular>

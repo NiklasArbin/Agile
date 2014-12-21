@@ -1,4 +1,4 @@
-﻿agile.kanbanBoardApp.controller('editCardCtrl', function ($scope, $mdDialog, $http, taskService, card) {
+﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, taskService, boardService, card) {
     $scope.task = card;
     $scope.hide = function () {
         $mdDialog.hide();

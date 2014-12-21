@@ -1,4 +1,6 @@
-﻿agile.kanbanBoardApp.controller('boardCtrl', function ($scope, $mdToast, $mdDialog, $filter, boardService) {
+﻿var agileControllers = angular.module('agileControllers', []);
+
+agileControllers.controller('boardCtrl', function ($scope, $mdToast, $mdDialog, $filter, boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;

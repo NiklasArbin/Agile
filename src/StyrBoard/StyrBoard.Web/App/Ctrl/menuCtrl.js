@@ -1,12 +1,12 @@
-﻿agile.kanbanBoardApp.controller('menuCtrl', function ($scope, $mdSidenav) {
+﻿agileControllers.controller('menuCtrl', function ($scope, $mdSidenav) {
 
     $scope.menuItems = [
         {
-            title: 'item 1',
-            link: 'http://google.com'
+            title: 'Board',
+            link: '/#/board'
         },
         {
-            title: 'item 2',
-            link: 'http://youtube.com'
+            title: 'Backlog',
+            link: '/#/list'
         }];
 });

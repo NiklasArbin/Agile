@@ -35,10 +35,6 @@
                     <div ng-repeat="menuItem in menuItems" layout="row">
                         <md-button flex ng-href="{{menuItem.link}}">{{menuItem.title}}</md-button>
                     </div>
-                    <p>
-                        This sidenav is locked open on your device. To go back to the default behavior,
-                        narrow your display.
-                    </p>
                 </md-content>
             </md-sidenav>
             <md-content class="md-padding" flex>
@@ -52,6 +48,7 @@
     @Scripts.Render("~/bundles/jquery")
     <script src="~/Scripts/jquery.signalR-2.1.2.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
+    <script src="~/bower_components/angular-route/angular-route.js"></script>
     <script src="/bower_components/angular-aria/angular-aria.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/hammerjs/hammer.js"></script>
