@@ -1,6 +1,6 @@
 ﻿var agileControllers = angular.module('agileControllers', []);
 
-agileControllers.controller('boardCtrl', function ($scope, $mdToast, $mdDialog, $filter, boardService) {
+agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
@@ -110,6 +110,11 @@ agileControllers.controller('boardCtrl', function ($scope, $mdToast, $mdDialog, 
 
             });
     };
+
+    $rootScope.$on('addNew', function(e) {
+        var card = { Name: 'new', Description: 'body' }
+        $scope.editCard(e, card);
+    });
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
     $scope.$parent.$on("refreshBoard", function (e) {

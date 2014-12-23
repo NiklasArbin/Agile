@@ -32,6 +32,10 @@
                     <h1 class="md-toolbar-tools">Menu</h1>
                 </md-toolbar>
                 <md-content class="md-padding">
+                    <div layout="row">
+                        <md-button ng-click="addNew()" flex>Add New</md-button>
+                    </div>
+                    <md-divider></md-divider>
                     <div ng-repeat="menuItem in menuItems" layout="row">
                         <md-button flex ng-href="{{menuItem.link}}">{{menuItem.title}}</md-button>
                     </div>
