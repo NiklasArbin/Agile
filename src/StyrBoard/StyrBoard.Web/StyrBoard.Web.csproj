@@ -203,6 +203,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\ApiControllerInstaller.cs" />
+    <Compile Include="IoC\RavenInstaller.cs" />
     <Compile Include="IoC\SignalRDependencyResolver.cs" />
     <Compile Include="IoC\ViewRepositoryInstaller.cs" />
     <Compile Include="IoC\WindsorCompositionRoot.cs" />
