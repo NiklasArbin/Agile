@@ -14,8 +14,10 @@ namespace StyrBoard.Web.IoC
             var documentStore = new EmbeddableDocumentStore
             {
                 DataDirectory = "Data",
-                UseEmbeddedHttpServer = true
+                UseEmbeddedHttpServer = false
             };
+
+            documentStore.Initialize();
 
             container.Register(
                 Component.For<IDocumentStore>().Instance(documentStore));

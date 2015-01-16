@@ -232,3 +232,4 @@ $RECYCLE.BIN/
 **/.bin/
 !**/Agile.Web/.bin/
 src/StyrBoard/StyrBoard.Web/Data/*
+src/StyrBoard/StyrBoard.Web/local.config
