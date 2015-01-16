@@ -13,15 +13,13 @@ namespace StyrBoard.Web
 {
     public class WebApiApplication : System.Web.HttpApplication
     {
-        private readonly IWindsorContainer _container;
+        private IWindsorContainer _container;
 
-        public WebApiApplication()
+        
+        protected void Application_Start()
         {
             _container = new WindsorContainer();
             _container.Install(FromAssembly.This());
-        }
-        protected void Application_Start()
-        {
             _container.Register(Classes.FromThisAssembly().BasedOn(typeof(IHub)).LifestyleTransient());
             var signalRDependencyResolver = new SignalRDependencyResolver(_container);
             Microsoft.AspNet.SignalR.GlobalHost.DependencyResolver = signalRDependencyResolver;   
