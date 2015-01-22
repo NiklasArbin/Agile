@@ -42,6 +42,8 @@
     <Compile Include="Bug.cs" />
     <Compile Include="Epic.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Interfaces\IAggregateRoot.cs" />
+    <Compile Include="Interfaces\IDescribed.cs" />
     <Compile Include="Impediment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sprint.cs" />
