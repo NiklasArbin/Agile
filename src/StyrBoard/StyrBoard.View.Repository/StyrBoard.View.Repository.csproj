@@ -58,7 +58,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StyrBoard.View.Model\StyrBoard.View.Model.csproj">
       <Project>{B0916A81-AD96-4871-B3F1-00DF4B7A6517}</Project>
-      <Name>Agile.View.Model</Name>
+      <Name>StyrBoard.View.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
