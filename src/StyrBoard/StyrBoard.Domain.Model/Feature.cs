@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace StyrBoard.Domain.Model
 {
@@ -9,7 +10,7 @@ namespace StyrBoard.Domain.Model
             UserStories = new List<UserStory>();
         }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public List<UserStory> UserStories { get; set; }
