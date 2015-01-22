@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StyrBoard.Domain.Model
 {
-    public class Epic : IAggregateRoot, IDescribed
+    public class Epic : IAggregateRoot, IDescribed, IHaveState
     {
         public Epic()
         {
@@ -15,5 +15,6 @@ namespace StyrBoard.Domain.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public List<Feature> Features { get; set; }
+        public State State { get; set; }
     }
 }

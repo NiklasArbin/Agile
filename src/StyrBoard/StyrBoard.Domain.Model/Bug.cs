@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StyrBoard.Domain.Model
 {
-    public class Bug : IDescribed, IAggregateRoot, ICanHaveImpediments
+    public class Bug : IDescribed, IAggregateRoot, ICanHaveImpediments, IHaveState
     {
         public Bug()
         {
@@ -15,5 +15,6 @@ namespace StyrBoard.Domain.Model
         public string Description { get; set; }
 
         public List<Impediment> Impediments { get; private set; }
+        public State State { get; set; }
     }
 }

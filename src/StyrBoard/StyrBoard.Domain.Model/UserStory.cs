@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StyrBoard.Domain.Model
 {
-    public class UserStory : IDescribed, IAggregateRoot, ICanHaveImpediments
+    public class UserStory : IDescribed, IAggregateRoot, ICanHaveImpediments, IHaveState
     {
         public UserStory()
         {
@@ -18,5 +18,6 @@ namespace StyrBoard.Domain.Model
         public List<Task> Tasks { get; set; }
         public int SprintId { get; set; }
         public List<Impediment> Impediments { get; private set; }
+        public State State { get; set; }
     }
 }
