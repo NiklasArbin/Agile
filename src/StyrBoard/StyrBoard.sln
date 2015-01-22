@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyrBoard.View.Model", "Sty
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyrBoard.View.Repository", "StyrBoard.View.Repository\StyrBoard.View.Repository.csproj", "{EC7CD30D-0C92-4A74-B511-652E3BDE080B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyrBoard.Domain.Repository.Tests", "StyrBoard.Domain.Repository.Tests\StyrBoard.Domain.Repository.Tests.csproj", "{8B9BA4A6-EF1D-4B54-A5ED-A75A72A8A9CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StyrBoard.Tests", "StyrBoard.Domain.Repository.Tests\StyrBoard.Tests.csproj", "{8B9BA4A6-EF1D-4B54-A5ED-A75A72A8A9CE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
