@@ -9,7 +9,7 @@ using StyrBoard.Domain.Repository.Model;
 
 namespace StyrBoard.Domain.Repository
 {
-    public abstract class BaseRepository<T> :IRepository<T> where T:IAggregateRoot
+    public abstract class BaseRepository<T> : IRepository<T> where T : IAggregateRoot
     {
         private readonly IDocumentStore _store;
 
