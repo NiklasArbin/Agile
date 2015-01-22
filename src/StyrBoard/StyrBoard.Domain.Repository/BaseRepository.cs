@@ -30,16 +30,20 @@ namespace StyrBoard.Domain.Repository
         {
             using (var session = _store.OpenSession())
             {
+                BeforeSave(item, session);
+
                 if (item.DisplayId < 1)
                 {
                     var map = new GuidToIntMap { GuidId = item.Id };
                     session.Store(map);
                     item.DisplayId = map.Id;
                 }
-                SaveInternal(item, session);
+                session.Store(item);
+                session.SaveChanges();
             }
         }
 
-        protected abstract void SaveInternal(T item, IDocumentSession session);
+        protected virtual void BeforeSave(T item, IDocumentSession session)
+        {}
     }
 }

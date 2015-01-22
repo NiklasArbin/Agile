@@ -11,7 +11,7 @@ namespace StyrBoard.Tests.DomainRepository
         {
         }
 
-        protected override void SaveInternal(TestDomainEntity item, IDocumentSession session)
+        protected override void BeforeSave(TestDomainEntity item, IDocumentSession session)
         {
             // Do nothing here!
         }

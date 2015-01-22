@@ -8,11 +8,5 @@ namespace StyrBoard.Domain.Repository
     {
         public UserStoryRepository(IDocumentStore store) : base(store)
         {}
-
-        protected override void SaveInternal(UserStory item, IDocumentSession session)
-        {
-            session.Store(item);
-            session.SaveChanges();
-        }
     }
 }
