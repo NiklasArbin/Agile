@@ -33,8 +33,7 @@ namespace StyrBoard.Domain.Repository
                 {
                     var map = new GuidToIntMap { GuidId = item.Id };
                     session.Store(map);
-                    var id = session.Query<GuidToIntMap>().Single(x => x.GuidId == item.Id).Id;
-                    item.DisplayId = id;
+                    item.DisplayId = map.Id;
                 }
 
                 session.Store(item);
