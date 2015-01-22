@@ -42,6 +42,7 @@
     <Compile Include="Bug.cs" />
     <Compile Include="Epic.cs" />
     <Compile Include="Feature.cs" />
+    <Compile Include="Interfaces\ICanHaveImpediments.cs" />
     <Compile Include="Interfaces\IAggregateRoot.cs" />
     <Compile Include="Interfaces\IDescribed.cs" />
     <Compile Include="Impediment.cs" />
