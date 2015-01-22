@@ -1,6 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Linq;
+
 using Raven.Client;
+
 using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository.Model;
 
@@ -8,16 +11,16 @@ namespace StyrBoard.Domain.Repository
 {
     public abstract class BaseRepository<T> :IRepository<T> where T:IAggregateRoot
     {
-        protected readonly IDocumentStore Store;
+        private readonly IDocumentStore _store;
 
         protected BaseRepository(IDocumentStore store)
         {
-            Store = store;
+            _store = store;
         }
 
         public T Get(Guid id)
         {
-            using (var session = Store.OpenSession())
+            using (var session = _store.OpenSession())
             {
                 return session.Query<T>().Single(x => x.Id == id);
             }
@@ -25,7 +28,7 @@ namespace StyrBoard.Domain.Repository
 
         public void Save(T item)
         {
-            using (var session = Store.OpenSession())
+            using (var session = _store.OpenSession())
             {
                 if (item.DisplayId < 1)
                 {
