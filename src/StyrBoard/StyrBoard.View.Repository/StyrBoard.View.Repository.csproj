@@ -53,9 +53,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardRepository.cs" />
+    <Compile Include="DeprecatedBoardRepository.cs" />
+    <Compile Include="IBoardRepository.cs" />
+    <Compile Include="IDeprecatedBoardRepository.cs" />
+    <Compile Include="Mappings\BoardMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StyrBoard.Domain.Model\StyrBoard.Domain.Model.csproj">
+      <Project>{507d9b12-ab6b-4559-aad7-166ae386e62c}</Project>
+      <Name>StyrBoard.Domain.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StyrBoard.View.Model\StyrBoard.View.Model.csproj">
       <Project>{B0916A81-AD96-4871-B3F1-00DF4B7A6517}</Project>
       <Name>StyrBoard.View.Model</Name>
