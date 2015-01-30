@@ -32,14 +32,11 @@ namespace StyrBoard.View.Repository.Mappings
 
         public static List<Column> GetDefaultColumns()
         {
-            return new List<Column>
+            return State.GetDefaultStates().Select(state => new Column()
             {
-                new Column {Name = "Open", Id = 1},
-                new Column {Name = "In Progress", Id = 2},
-                new Column {Name = "Testing", Id = 3},
-                new Column {Name = "Completed", Id = 4},
-                new Column {Name = "Closed", Id = 5},
-            };
+                Name = state.Name, 
+                Id = state.Id
+            }).ToList();
         }
     }
 }
