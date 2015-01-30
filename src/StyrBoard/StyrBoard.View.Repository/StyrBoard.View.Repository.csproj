@@ -64,6 +64,10 @@
       <Project>{507d9b12-ab6b-4559-aad7-166ae386e62c}</Project>
       <Name>StyrBoard.Domain.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StyrBoard.Domain.Repository\StyrBoard.Domain.Repository.csproj">
+      <Project>{cdd70048-22d9-4fcf-afba-7618bcaabfbb}</Project>
+      <Name>StyrBoard.Domain.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StyrBoard.View.Model\StyrBoard.View.Model.csproj">
       <Project>{B0916A81-AD96-4871-B3F1-00DF4B7A6517}</Project>
       <Name>StyrBoard.View.Model</Name>

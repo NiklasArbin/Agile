@@ -1,6 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
+using StyrBoard.Domain.Model;
+using StyrBoard.Domain.Repository;
 using StyrBoard.View.Repository;
 
 namespace StyrBoard.Web.IoC
@@ -9,9 +11,8 @@ namespace StyrBoard.Web.IoC
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(
-                Component.For<IBoardRepository>().ImplementedBy<BoardRepository>()
-                );
+            container.Register(Component.For<IBoardRepository>().ImplementedBy<BoardRepository>());
+            container.Register(Component.For<IRepository<UserStory>>().ImplementedBy<UserStoryRepository>());
         }
     }
 }

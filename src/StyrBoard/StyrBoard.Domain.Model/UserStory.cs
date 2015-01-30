@@ -9,6 +9,7 @@ namespace StyrBoard.Domain.Model
         {
             Tasks = new List<Task>();
             Impediments = new List<Impediment>();
+            Id = Guid.NewGuid();
         }
 
         public Guid Id { get; set; }

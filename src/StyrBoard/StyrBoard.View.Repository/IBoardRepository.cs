@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using StyrBoard.View.Model;
+﻿using StyrBoard.View.Model;
 
 namespace StyrBoard.View.Repository
 {

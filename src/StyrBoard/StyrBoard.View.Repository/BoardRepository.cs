@@ -2,6 +2,7 @@
 using System.Linq;
 using Raven.Client;
 using StyrBoard.Domain.Model;
+using StyrBoard.Domain.Repository;
 using StyrBoard.View.Model;
 using StyrBoard.View.Repository.Mappings;
 using Task = StyrBoard.Domain.Model.Task;
@@ -11,45 +12,42 @@ namespace StyrBoard.View.Repository
     public class BoardRepository : IBoardRepository
     {
         private readonly IDocumentStore _documentStore;
+        private readonly IRepository<UserStory> _userStoryRepository;
 
-        public BoardRepository(IDocumentStore documentStore)
+        public BoardRepository(IDocumentStore documentStore, IRepository<UserStory> userStoryRepository)
         {
             _documentStore = documentStore;
+            _userStoryRepository = userStoryRepository;
         }
 
         public Board Get()
         {
+            List<UserStory> userStories;
+
             using (var session = _documentStore.OpenSession())
             {
-                var userStories = session.Query<UserStory>().ToList();
-                if (userStories.Any())
-                    return userStories.ToViewModel();
+                userStories = session.Query<UserStory>().ToList();
             }
 
-            return GetDummyData().ToViewModel();
-        }
-
-        private List<UserStory> GetDummyData()
-        {
-            var result = new List<UserStory>();
-
-            result.Add(CreateDummyUserStory("Open", "Test1", 1));
-            result.Add(CreateDummyUserStory("In Progress", "Test2", 2));
-            result.Add(CreateDummyUserStory("Testing", "Test3", 3));
-            result.Add(CreateDummyUserStory("Completed", "Test4", 4));
-            result.Add(CreateDummyUserStory("Closed", "Test5", 5));
-
-            return result;
-        }
-
-        private UserStory CreateDummyUserStory(string stateName, string title, int id)
-        {
-            return new UserStory()
+            if (!userStories.Any())
             {
-                State = new State() {Name = stateName},
-                Title=title,
-                DisplayId = id
-            };
+                CreateDefaultData();
+                using (var session = _documentStore.OpenSession())
+                {
+                    userStories = session.Query<UserStory>().ToList();
+                }
+            }
+
+            return userStories.ToViewModel();
+        }
+
+        private void CreateDefaultData()
+        {
+            _userStoryRepository.Save(new UserStory() {State = new State() {Name = "Open"}, Title = "Test1"});
+            _userStoryRepository.Save(new UserStory() { State = new State() { Name = "In Progress" }, Title = "Test2" });
+            _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Testing" }, Title = "Test3" });
+            _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Completed" }, Title = "Test4" });
+            _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Closed" }, Title = "Test5" });
         }
     }
 }
