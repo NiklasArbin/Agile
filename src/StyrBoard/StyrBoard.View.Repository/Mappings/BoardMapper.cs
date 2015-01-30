@@ -11,14 +11,7 @@ namespace StyrBoard.View.Repository.Mappings
         {
             var result = new Board
             {
-                Columns = new List<Column>
-                {
-                    new Column{Name = "Open"},
-                    new Column{Name = "In Progress"},
-                    new Column{Name = "Testing"},
-                    new Column{Name = "Completed"},
-                    new Column{Name = "Closed"},
-                }
+                Columns = GetDefaultColumns()
             };
 
             foreach (var userStory in domainModel)
@@ -35,6 +28,18 @@ namespace StyrBoard.View.Repository.Mappings
             }
 
             return result;
+        }
+
+        public static List<Column> GetDefaultColumns()
+        {
+            return new List<Column>
+            {
+                new Column {Name = "Open", Id = 1},
+                new Column {Name = "In Progress", Id = 2},
+                new Column {Name = "Testing", Id = 3},
+                new Column {Name = "Completed", Id = 4},
+                new Column {Name = "Closed", Id = 5},
+            };
         }
     }
 }

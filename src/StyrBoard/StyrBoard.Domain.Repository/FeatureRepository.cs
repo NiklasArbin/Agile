@@ -6,7 +6,7 @@ namespace StyrBoard.Domain.Repository
     public class FeatureRepository : BaseRepository<Feature>
     {
         public FeatureRepository(IDocumentStore store)
-            : base(store)
+            : base(store, "Features")
         { }
     }
 }

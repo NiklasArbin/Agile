@@ -6,7 +6,7 @@ namespace StyrBoard.Domain.Repository
 {
     public class UserStoryRepository : BaseRepository<UserStory>
     {
-        public UserStoryRepository(IDocumentStore store) : base(store)
+        public UserStoryRepository(IDocumentStore store) : base(store, "UserStories")
         {}
     }
 }

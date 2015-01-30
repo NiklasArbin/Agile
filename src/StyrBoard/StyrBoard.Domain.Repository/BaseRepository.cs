@@ -1,9 +1,6 @@
 ﻿
 using System;
-using System.Linq;
-
 using Raven.Client;
-
 using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository.Model;
 
@@ -12,18 +9,34 @@ namespace StyrBoard.Domain.Repository
     public abstract class BaseRepository<T> : IRepository<T> where T : IAggregateRoot
     {
         private readonly IDocumentStore _store;
+        private string _tableName;
 
-        protected BaseRepository(IDocumentStore store)
+        protected BaseRepository(IDocumentStore store, string tableName)
         {
             _store = store;
+            _tableName = tableName;
         }
 
         public T Get(Guid id)
         {
             using (var session = _store.OpenSession())
             {
-                return session.Query<T>().Single(x => x.Id == id);
+                return session.Load<T>(_tableName + "/" + id);
             }
+        }
+
+        public T Get(int id)
+        {
+            Guid guid;
+
+            using (var session = _store.OpenSession())
+            {
+                var queryString = typeof (GuidToIntMap).Name + "s/" + id;
+                var map = session.Load<GuidToIntMap>(queryString);
+                guid = map.GuidId;
+            }
+
+            return Get(guid);
         }
 
         public void Save(T item)

@@ -20,5 +20,10 @@ namespace StyrBoard.Domain.Model
         public int SprintId { get; set; }
         public List<Impediment> Impediments { get; private set; }
         public State State { get; set; }
+
+        public void ChangeState(string newState)
+        {
+            this.State.Name = newState;
+        }
     }
 }

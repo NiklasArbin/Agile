@@ -42,7 +42,7 @@ namespace StyrBoard.Web.Controllers
         public HttpResponseMessage MoveTask(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-            //_boardRepository.MoveTask((int)json.taskId, (int)json.targetColId); // TODO
+            _boardRepository.MoveUserStory((int)json.taskId, (int)json.targetColId); 
 
             var response = Request.CreateResponse();
             response.StatusCode = HttpStatusCode.OK;

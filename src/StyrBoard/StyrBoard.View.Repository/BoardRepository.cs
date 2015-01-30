@@ -41,6 +41,14 @@ namespace StyrBoard.View.Repository
             return userStories.ToViewModel();
         }
 
+        public void MoveUserStory(int userStoryId, int columnId)
+        {
+            var column = BoardMapper.GetDefaultColumns().Single(col => col.Id == columnId);
+            var userStory = _userStoryRepository.Get(userStoryId);
+            userStory.ChangeState(column.Name);
+            _userStoryRepository.Save(userStory);
+        }
+
         private void CreateDefaultData()
         {
             _userStoryRepository.Save(new UserStory() {State = new State() {Name = "Open"}, Title = "Test1"});

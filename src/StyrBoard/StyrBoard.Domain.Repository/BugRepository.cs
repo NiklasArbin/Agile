@@ -6,7 +6,7 @@ namespace StyrBoard.Domain.Repository
     public class BugRepository : BaseRepository<Bug>
     {
         public BugRepository(IDocumentStore store)
-            : base(store)
+            : base(store, "Bugs")
         { }
     }
 }

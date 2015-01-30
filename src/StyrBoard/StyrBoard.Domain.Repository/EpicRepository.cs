@@ -6,7 +6,7 @@ namespace StyrBoard.Domain.Repository
     public class EpicRepository : BaseRepository<Epic>
     {
         public EpicRepository(IDocumentStore store)
-            : base(store)
+            : base(store, "Epics")
         { }
     }
 }

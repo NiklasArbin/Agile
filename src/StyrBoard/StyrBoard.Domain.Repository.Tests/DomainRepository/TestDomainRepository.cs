@@ -7,7 +7,7 @@ namespace StyrBoard.Tests.DomainRepository
 {
     public class TestDomainRepository : BaseRepository<TestDomainEntity>
     {
-        public TestDomainRepository(IDocumentStore store) : base(store)
+        public TestDomainRepository(IDocumentStore store) : base(store, "Tests")
         {
         }
 
