@@ -233,3 +233,5 @@ $RECYCLE.BIN/
 !**/Agile.Web/.bin/
 src/StyrBoard/StyrBoard.Web/Data/*
 src/StyrBoard/StyrBoard.Web/local.config
+src/StyrBoard/StyrBoard.Web/Raven/CompiledIndexCache/*.debug.dll
+src/StyrBoard/StyrBoard.Web/Raven/CompiledIndexCache/*.debug.dll.cs
