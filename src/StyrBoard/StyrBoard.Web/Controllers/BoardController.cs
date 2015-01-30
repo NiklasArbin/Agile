@@ -22,8 +22,8 @@ namespace StyrBoard.Web.Controllers
         public HttpResponseMessage Get()
         {
             var response = Request.CreateResponse();
-            var columns = _boardRepository.Get();
-            response.Content = new StringContent(JsonConvert.SerializeObject(columns));
+            var board = _boardRepository.Get();
+            response.Content = new StringContent(JsonConvert.SerializeObject(board.Columns));
             response.StatusCode = HttpStatusCode.OK;
 
             return response;
