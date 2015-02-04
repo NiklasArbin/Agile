@@ -21,9 +21,9 @@ namespace StyrBoard.Domain.Model
         public List<Impediment> Impediments { get; private set; }
         public State State { get; set; }
 
-        public void ChangeState(string newState)
+        public void MoveTo(State newState)
         {
-            this.State.Name = newState;
+            this.State = newState;
         }
     }
 }

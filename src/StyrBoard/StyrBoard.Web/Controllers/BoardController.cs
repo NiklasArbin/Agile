@@ -49,7 +49,7 @@ namespace StyrBoard.Web.Controllers
             var userStory = _userStoryRepository.Get((int) json.taskId);
 
             var newState = State.GetDefaultStates().Single(s => s.Id == (int) json.targetColId);
-            userStory.ChangeState(newState.Name);
+            userStory.MoveTo(newState);
 
             _userStoryRepository.Save(userStory);
 
