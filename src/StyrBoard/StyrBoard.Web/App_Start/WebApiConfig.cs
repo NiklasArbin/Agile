@@ -12,8 +12,8 @@ namespace StyrBoard.Web
             config.SuppressDefaultHostAuthentication();
             config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
 
-            // Web API routes
-            config.MapHttpAttributeRoutes();
+            // Not used since RavenDb Embedded will set this up and cause a conflict. If we remove raven embedded this needs to be used again.
+            //config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

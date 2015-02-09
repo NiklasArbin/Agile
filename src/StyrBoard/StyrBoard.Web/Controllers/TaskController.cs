@@ -28,9 +28,9 @@ namespace StyrBoard.Web.Controllers
         public HttpResponseMessage Get(int id)
         {
             var response = Request.CreateResponse();
-            var task = _boardRepository.GetTask(id);
-            response.Content = new StringContent(JsonConvert.SerializeObject(task));
-            response.StatusCode = HttpStatusCode.OK;
+            //var task = _boardRepository.GetTask(id);
+            //response.Content = new StringContent(JsonConvert.SerializeObject(task));
+            //response.StatusCode = HttpStatusCode.OK;
             return response;
         }
 
@@ -42,17 +42,17 @@ namespace StyrBoard.Web.Controllers
         // PUT: api/Task/5
         public void Put(int id, JObject value)
         {
-            var task = JsonConvert.DeserializeObject<Task>(value.ToString());
-            var taskToUpdate = _boardRepository.GetTask(id);
-            taskToUpdate.ColumnId = task.ColumnId;
-            taskToUpdate.Description = task.Description;
-            taskToUpdate.Name = task.Name;
+            //var task = JsonConvert.DeserializeObject<Task>(value.ToString());
+            //var taskToUpdate = _boardRepository.GetTask(id);
+            //taskToUpdate.ColumnId = task.ColumnId;
+            //taskToUpdate.Description = task.Description;
+            //taskToUpdate.Name = task.Name;
         }
 
         // DELETE: api/Task/5
         public void Delete(int id)
         {
-            _boardRepository.DeleteTask(id);
+            //_boardRepository.DeleteTask(id);
         }
     }
 }

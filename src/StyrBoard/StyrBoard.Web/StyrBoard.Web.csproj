@@ -52,7 +52,20 @@
       <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.1.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Raven.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Database.3.0.3528\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.3.0.3528\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Database, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Database.3.0.3528\lib\net45\Raven.Database.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Entity" />
@@ -190,6 +203,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="IoC\ApiControllerInstaller.cs" />
+    <Compile Include="IoC\RavenInstaller.cs" />
     <Compile Include="IoC\SignalRDependencyResolver.cs" />
     <Compile Include="IoC\ViewRepositoryInstaller.cs" />
     <Compile Include="IoC\WindsorCompositionRoot.cs" />
@@ -575,6 +589,14 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StyrBoard.Domain.Model\StyrBoard.Domain.Model.csproj">
+      <Project>{507d9b12-ab6b-4559-aad7-166ae386e62c}</Project>
+      <Name>StyrBoard.Domain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StyrBoard.Domain.Repository\StyrBoard.Domain.Repository.csproj">
+      <Project>{cdd70048-22d9-4fcf-afba-7618bcaabfbb}</Project>
+      <Name>StyrBoard.Domain.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StyrBoard.View.Model\StyrBoard.View.Model.csproj">
       <Project>{b0916a81-ad96-4871-b3f1-00df4b7a6517}</Project>
       <Name>StyrBoard.View.Model</Name>

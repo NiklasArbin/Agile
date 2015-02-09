@@ -30,7 +30,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Raven.Abstractions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Database.3.0.3528\lib\net45\Raven.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client.Lightweight, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.3.0.3528\lib\net45\Raven.Client.Lightweight.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Database, Version=3.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Database.3.0.3528\lib\net45\Raven.Database.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,13 +53,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardRepository.cs" />
+    <Compile Include="DeprecatedBoardRepository.cs" />
+    <Compile Include="IBoardRepository.cs" />
+    <Compile Include="IDeprecatedBoardRepository.cs" />
+    <Compile Include="Mappings\BoardMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StyrBoard.Domain.Model\StyrBoard.Domain.Model.csproj">
+      <Project>{507d9b12-ab6b-4559-aad7-166ae386e62c}</Project>
+      <Name>StyrBoard.Domain.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StyrBoard.Domain.Repository\StyrBoard.Domain.Repository.csproj">
+      <Project>{cdd70048-22d9-4fcf-afba-7618bcaabfbb}</Project>
+      <Name>StyrBoard.Domain.Repository</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StyrBoard.View.Model\StyrBoard.View.Model.csproj">
       <Project>{B0916A81-AD96-4871-B3F1-00DF4B7A6517}</Project>
-      <Name>Agile.View.Model</Name>
+      <Name>StyrBoard.View.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
