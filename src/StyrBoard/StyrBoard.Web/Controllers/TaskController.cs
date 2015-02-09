@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -35,8 +36,14 @@ namespace StyrBoard.Web.Controllers
         }
 
         // POST: api/Task
-        public void Post([FromBody]string value)
+        public HttpResponseMessage Post(JObject value)
         {
+            var task = JsonConvert.DeserializeObject<Task>(value.ToString());
+            var response = Request.CreateResponse();
+            response.StatusCode = HttpStatusCode.Created;
+            var id = _boardRepository.CreateTask(task);
+            response.Headers.Location = new Uri(string.Format("{0}/{1}", Request.RequestUri, id));
+            return response;
         }
 
         // PUT: api/Task/5

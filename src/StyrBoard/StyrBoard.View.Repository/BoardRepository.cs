@@ -10,6 +10,7 @@ namespace StyrBoard.View.Repository
         void MoveTask(int taskId, int targetColId);
         Task GetTask(int taskId);
         void DeleteTask(int taskId);
+        int CreateTask(Task task);
     }
 
     public class BoardRepository : IBoardRepository
@@ -82,13 +83,21 @@ namespace StyrBoard.View.Repository
             column.Tasks.RemoveAll(t => t.Id == taskId);
         }
 
+        public int CreateTask(Task task)
+        {
+            var max = (from column in _columns from t in column.Tasks select t.Id).Concat(new[] {0}).Max();
+            task.Id = max + 1;
+            _columns[0].Tasks.Add(task);
+            return task.Id;
+        }
+
         public void MoveTask(int taskId, int targetColId)
         {
             var task = _columns.Single(c => c.Tasks.Exists(t => t.Id == taskId)).Tasks.Single(t => t.Id == taskId);
             var column = _columns.Single(c => c.Tasks.Any(t => t.Id == taskId));
             column.Tasks.Remove(task);
             task.ColumnId = targetColId;
-            _columns.Single(c=>c.Id == targetColId).Tasks.Add(task);
+            _columns.Single(c => c.Id == targetColId).Tasks.Add(task);
 
         }
     }
