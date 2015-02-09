@@ -7,6 +7,8 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Microsoft.AspNet.SignalR.Hubs;
+using Raven.Client.Linq;
+using StyrBoard.Domain.Repository.IoC;
 using StyrBoard.Web.IoC;
 
 namespace StyrBoard.Web
@@ -15,16 +17,17 @@ namespace StyrBoard.Web
     {
         private IWindsorContainer _container;
 
-        
+
         protected void Application_Start()
         {
             _container = new WindsorContainer();
             _container.Install(FromAssembly.This());
+            _container.Install(FromAssembly.Containing<RepositoryInstaller>());
             _container.Register(Classes.FromThisAssembly().BasedOn(typeof(IHub)).LifestyleTransient());
             var signalRDependencyResolver = new SignalRDependencyResolver(_container);
-            Microsoft.AspNet.SignalR.GlobalHost.DependencyResolver = signalRDependencyResolver;   
+            Microsoft.AspNet.SignalR.GlobalHost.DependencyResolver = signalRDependencyResolver;
             InstallInversionOfControlForWebApi();
-            
+
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -35,7 +38,7 @@ namespace StyrBoard.Web
 
         public override void Dispose()
         {
-            _container.Dispose();
+            if (_container != null) _container.Dispose();
             base.Dispose();
         }
 

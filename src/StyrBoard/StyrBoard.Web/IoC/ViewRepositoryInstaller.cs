@@ -13,6 +13,7 @@ namespace StyrBoard.Web.IoC
         {
             container.Register(Component.For<IBoardRepository>().ImplementedBy<BoardRepository>());
             container.Register(Component.For<IRepository<UserStory>>().ImplementedBy<UserStoryRepository>());
+            container.Register(Component.For<ICardRepository>().ImplementedBy<CardRepository>());
         }
     }
 }

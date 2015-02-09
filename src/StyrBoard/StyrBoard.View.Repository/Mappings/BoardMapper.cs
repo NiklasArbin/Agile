@@ -2,11 +2,21 @@
 using System.Linq;
 using StyrBoard.Domain.Model;
 using StyrBoard.View.Model;
+using Task = StyrBoard.View.Model.Task;
 
 namespace StyrBoard.View.Repository.Mappings
 {
     public static class BoardMapper
     {
+        public static Task ToViewModel(this UserStory domainModel)
+        {
+            return new Task
+            {
+                Name = domainModel.Title,
+                Description = domainModel.Description,
+                Id = domainModel.DisplayId
+            };
+        }
         public static Board ToViewModel(this List<UserStory> domainModel)
         {
             var result = new Board
@@ -22,6 +32,7 @@ namespace StyrBoard.View.Repository.Mappings
 
                 column.Tasks.Add(new View.Model.Task()
                 {
+                    ColumnId = column.Id,
                     Name = userStory.Title,
                     Id = userStory.DisplayId
                 });
@@ -34,7 +45,7 @@ namespace StyrBoard.View.Repository.Mappings
         {
             return State.GetDefaultStates().Select(state => new Column()
             {
-                Name = state.Name, 
+                Name = state.Name,
                 Id = state.Id
             }).ToList();
         }

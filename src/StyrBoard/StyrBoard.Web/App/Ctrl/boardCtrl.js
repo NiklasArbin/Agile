@@ -1,6 +1,6 @@
 ﻿var agileControllers = angular.module('agileControllers', []);
 
-agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService) {
+agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService, taskService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
@@ -74,6 +74,12 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         var cardIndex = $scope.getCardIndexById(id);
         $scope.columns[columnIndex].Tasks.splice(cardIndex, 1);
     }
+
+    $scope.addCard = function (location) {
+        var card = taskService.getTask(location);
+
+    }
+
     $scope.updateCard = function (card) {
         var currentCard = $scope.getCardById(card.Id);
         if (card.ColumnId !== currentCard.ColumnId) {
@@ -117,21 +123,27 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     });
 
     // Listen to the 'refreshBoard' event and refresh the board as a result
-    $scope.$parent.$on("refreshBoard", function (e) {
+    $rootScope.$on("refreshBoard", function (e) {
         $scope.refreshBoard();
         toast('Board updated successfully');
     });
 
     // Listen to the 'updateCard' event and refresh the card as a result
-    $scope.$parent.$on("cardUpdated", function (evt, card) {
+    $rootScope.$on("cardUpdated", function (evt, card) {
         $scope.updateCard(card);
         toast('Card updated successfully');
     });
 
     // Listen to the 'deleteCard' event and delete the card as a result
-    $scope.$parent.$on("cardDeleted", function (evt, id) {
+    $rootScope.$on("cardDeleted", function (evt, id) {
         $scope.deleteCard(id);
         toast('Card deleted successfully');
+    });
+
+    // Listen to the 'deleteCard' event and delete the card as a result
+    $rootScope.$on("cardAdded", function (evt, location) {
+        $scope.addCard(location);
+        toast('Card added successfully');
     });
 
     var toast = function (message) {

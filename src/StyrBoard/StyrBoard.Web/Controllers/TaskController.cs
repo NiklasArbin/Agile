@@ -5,18 +5,22 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StyrBoard.View.Model;
+using StyrBoard.Domain.Model;
+using StyrBoard.Domain.Repository;
 using StyrBoard.View.Repository;
+using Task = StyrBoard.View.Model.Task;
 
 namespace StyrBoard.Web.Controllers
 {
     public class TaskController : ApiController
     {
-        private readonly IBoardRepository _boardRepository;
+        private readonly IRepository<UserStory> _userStoryRepository;
+        private readonly ICardRepository _cardRepository;
 
-        public TaskController(IBoardRepository boardRepository)
+        public TaskController(IRepository<UserStory> userStoryRepository, ICardRepository cardRepository)
         {
-            _boardRepository = boardRepository;
+            _userStoryRepository = userStoryRepository;
+            _cardRepository = cardRepository;
         }
 
         // GET: api/Task
@@ -26,12 +30,12 @@ namespace StyrBoard.Web.Controllers
         }
 
         // GET: api/Task/5
-        public HttpResponseMessage Get(int id)
+        public HttpResponseMessage Get(Guid id)
         {
             var response = Request.CreateResponse();
-            //var task = _boardRepository.GetTask(id);
-            //response.Content = new StringContent(JsonConvert.SerializeObject(task));
-            //response.StatusCode = HttpStatusCode.OK;
+            var card = _cardRepository.Get(id);
+            response.Content = new StringContent(JsonConvert.SerializeObject(card));
+            response.StatusCode = HttpStatusCode.OK;
             return response;
         }
 
@@ -40,9 +44,17 @@ namespace StyrBoard.Web.Controllers
         {
             var task = JsonConvert.DeserializeObject<Task>(value.ToString());
             var response = Request.CreateResponse();
+
+            var story = new UserStory
+            {
+                Description = task.Description,
+                Title = task.Name,
+                State = new State { Name = "Open" },
+            };
+            _userStoryRepository.Save(story);
+            
             response.StatusCode = HttpStatusCode.Created;
-            var id = _boardRepository.CreateTask(task);
-            response.Headers.Location = new Uri(string.Format("{0}/{1}", Request.RequestUri, id));
+            response.Headers.Location = new Uri(string.Format("{0}/{1}", Request.RequestUri, story.Id));
             return response;
         }
 

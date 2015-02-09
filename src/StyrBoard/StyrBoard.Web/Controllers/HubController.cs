@@ -9,11 +9,12 @@ namespace StyrBoard.Web.Controllers
     [HubName("MainHub")]
     public class HubController : Hub
     {
-        private readonly IBoardRepository _boardRepository;
+        private readonly ICardRepository _cardRepository;
 
-        public HubController(IBoardRepository boardRepository)
+
+        public HubController(ICardRepository cardRepository)
         {
-            _boardRepository = boardRepository;
+            _cardRepository = cardRepository;
         }
 
         public void NotifyBoardUpdated()
@@ -23,14 +24,18 @@ namespace StyrBoard.Web.Controllers
 
         public void NotifyCardUpdated(int taskId)
         {
-            //TODO
-            //var task = _boardRepository.GetTask(taskId);
-            //Clients.AllExcept(new[] { Context.ConnectionId }).CardUpdated(task);
+            var task = _cardRepository.Get(taskId);
+            Clients.AllExcept(new[] { Context.ConnectionId }).CardUpdated(task);
         }
 
         public void NotifyCardDeleted(int taskId)
         {
             Clients.AllExcept(new[] { Context.ConnectionId }).CardDeleted(taskId);
+        }
+
+        public void NotifyCardAdded(string location)
+        {
+            Clients.All.CardAdded(location);
         }
     }
 }

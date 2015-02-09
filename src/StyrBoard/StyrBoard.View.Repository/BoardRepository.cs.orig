@@ -5,10 +5,22 @@ using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository;
 using StyrBoard.View.Model;
 using StyrBoard.View.Repository.Mappings;
-using Task = StyrBoard.View.Model.Task;
+using Task = StyrBoard.Domain.Model.Task;
 
 namespace StyrBoard.View.Repository
 {
+<<<<<<< HEAD
+=======
+    public interface IBoardRepository
+    {
+        List<Column> GetColumns();
+        void MoveTask(int taskId, int targetColId);
+        Task GetTask(int taskId);
+        void DeleteTask(int taskId);
+        int CreateTask(Task task);
+    }
+
+>>>>>>> add-task
     public class BoardRepository : IBoardRepository
     {
         private readonly IDocumentStore _documentStore;
@@ -43,13 +55,34 @@ namespace StyrBoard.View.Repository
 
         private void CreateDefaultData()
         {
-            _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Open" }, Title = "Test1" });
+<<<<<<< HEAD
+            _userStoryRepository.Save(new UserStory() {State = new State() {Name = "Open"}, Title = "Test1"});
             _userStoryRepository.Save(new UserStory() { State = new State() { Name = "In Progress" }, Title = "Test2" });
             _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Testing" }, Title = "Test3" });
             _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Completed" }, Title = "Test4" });
             _userStoryRepository.Save(new UserStory() { State = new State() { Name = "Closed" }, Title = "Test5" });
+=======
+            var column = _columns.Single(c => c.Tasks.Exists(t => t.Id == taskId));
+            column.Tasks.RemoveAll(t => t.Id == taskId);
         }
 
+        public int CreateTask(Task task)
+        {
+            var max = (from column in _columns from t in column.Tasks select t.Id).Concat(new[] {0}).Max();
+            task.Id = max + 1;
+            _columns[0].Tasks.Add(task);
+            return task.Id;
+        }
 
+        public void MoveTask(int taskId, int targetColId)
+        {
+            var task = _columns.Single(c => c.Tasks.Exists(t => t.Id == taskId)).Tasks.Single(t => t.Id == taskId);
+            var column = _columns.Single(c => c.Tasks.Any(t => t.Id == taskId));
+            column.Tasks.Remove(task);
+            task.ColumnId = targetColId;
+            _columns.Single(c => c.Id == targetColId).Tasks.Add(task);
+
+>>>>>>> add-task
+        }
     }
 }

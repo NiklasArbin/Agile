@@ -53,9 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BoardRepository.cs" />
-    <Compile Include="DeprecatedBoardRepository.cs" />
+    <Compile Include="CardRepository.cs" />
     <Compile Include="IBoardRepository.cs" />
-    <Compile Include="IDeprecatedBoardRepository.cs" />
     <Compile Include="Mappings\BoardMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

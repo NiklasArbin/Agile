@@ -21,7 +21,7 @@
     var moveTask = function (taskIdVal, targetColIdVal) {
         return $http.post("/api/Board/MoveTask", { taskId: taskIdVal, targetColId: targetColIdVal })
             .then(function (response) {
-                return response.status == 200;
+                return response.status === 200;
             }, function (error) {
                 return $q.reject(error.data.Message);
             });
@@ -45,6 +45,10 @@
             $rootScope.$emit("cardDeleted", id);
         });
 
+        this.proxy.on('CardAdded', function (location) {
+            $rootScope.$emit("cardAdded", location);
+        });
+
         // Connecting to SignalR server        
         return connection.start()
         .then(function (connectionObj) {
@@ -65,12 +69,16 @@
     var notifyCardDeleted = function (taskId) {
         this.proxy.invoke('NotifyCardDeleted', taskId);
     };
+    var notifyCardAdded = function (location) {
+        this.proxy.invoke('NotifyCardAdded', location);
+    };
     
     return {
         initialize: initialize,
         sendRequest: sendRequest,
         notifyCardUpdated: notifyCardUpdated,
         notifyCardDeleted: notifyCardDeleted,
+        notifyCardAdded: notifyCardAdded,
         getColumns: getColumns,
         canMoveTask: canMoveTask,
         moveTask: moveTask
