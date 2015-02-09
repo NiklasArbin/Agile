@@ -18,8 +18,8 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         //    return true;
 
         //},
-        itemMoved: function(event) {
-            console.log('source ' +event.source.index);
+        itemMoved: function (event) {
+            console.log('source ' + event.source.index);
             console.log('dest ' + event.dest.index);
             var taskId = event.source.itemScope.modelValue.Id;
             var targetColumnId = event.dest.sortableScope.$parent.col.Id;
@@ -42,7 +42,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
            }, onError);
     };
 
-    $scope.getCardById = function(id) {
+    $scope.getCardById = function (id) {
         for (var i = 0; i < $scope.columns.length; i += 1) {
             for (var j = 0; j < $scope.columns[i].Tasks.length; j += 1) {
                 if ($scope.columns[i].Tasks[j].Id === id) {
@@ -61,7 +61,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         }
     };
 
-    $scope.getColumnIndexById = function(id) {
+    $scope.getColumnIndexById = function (id) {
         for (var i = 0; i < $scope.columns.length; i += 1) {
             if ($scope.columns[i].Id === id) {
                 return i;
@@ -74,7 +74,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         var cardIndex = $scope.getCardIndexById(id);
         $scope.columns[columnIndex].Tasks.splice(cardIndex, 1);
     }
-    $scope.updateCard = function(card) {
+    $scope.updateCard = function (card) {
         var currentCard = $scope.getCardById(card.Id);
         if (card.ColumnId !== currentCard.ColumnId) {
             //card should be moved to a new column
@@ -91,7 +91,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             currentCard.ColumnId = card.ColumnId;
         }
     }
-    
+
 
     $scope.editCard = function editCard(ev, card) {
         $mdDialog.show({
@@ -105,14 +105,14 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
                     $scope.deleteCard(card.Id);
                     toast('Card deleted successfully');
                 }
-                
+
             }, function () {
 
             });
     };
 
-    $rootScope.$on('addNew', function(e) {
-        var card = { Name: 'new', Description: 'body' }
+    $rootScope.$on('addNew', function (e) {
+        var card = { Id: -1, Name: 'new', Description: 'body' }
         $scope.editCard(e, card);
     });
 
@@ -134,7 +134,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         toast('Card deleted successfully');
     });
 
-    var toast = function(message) {
+    var toast = function (message) {
         $mdToast.show(
             $mdToast.simple()
             .content(message)

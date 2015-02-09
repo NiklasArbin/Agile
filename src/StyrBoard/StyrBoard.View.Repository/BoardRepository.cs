@@ -9,6 +9,7 @@ using Task = StyrBoard.Domain.Model.Task;
 
 namespace StyrBoard.View.Repository
 {
+        int CreateTask(Task task);
     public class BoardRepository : IBoardRepository
     {
         private readonly IDocumentStore _documentStore;
@@ -42,6 +43,13 @@ namespace StyrBoard.View.Repository
         }
 
         private void CreateDefaultData()
+        {
+            var max = (from column in _columns from t in column.Tasks select t.Id).Concat(new[] {0}).Max();
+            task.Id = max + 1;
+            _columns[0].Tasks.Add(task);
+            return task.Id;
+        }
+
         {
             _userStoryRepository.Save(new UserStory() {State = new State() {Name = "Open"}, Title = "Test1"});
             _userStoryRepository.Save(new UserStory() { State = new State() { Name = "In Progress" }, Title = "Test2" });

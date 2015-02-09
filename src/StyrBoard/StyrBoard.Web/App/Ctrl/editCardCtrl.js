@@ -1,5 +1,6 @@
 ﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, taskService, boardService, card) {
     $scope.task = card;
+    $scope.isNew = card.Id < 0;
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -11,7 +12,13 @@
         boardService.notifyCardUpdated(task.Id);
         $mdDialog.hide();
     };
-
+    $scope.create = function (task) {
+        taskService.createTask(task)
+            .then(function (location) {
+                boardService.notifyCardAdded(location);
+                $mdDialog.hide();
+        });
+    };
     $scope.delete = function (id) {
         taskService.deleteTask(id);
         boardService.notifyCardDeleted(id);

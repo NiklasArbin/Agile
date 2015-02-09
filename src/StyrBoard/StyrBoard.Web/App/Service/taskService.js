@@ -14,6 +14,15 @@
                 return $q.reject(error.data.Message);
             });
     };
+    var createTask = function (task) {
+        return $http.post("/api/Task", task)
+            .then(function (response) {
+            return response.headers('location');
+        }, function (error) {
+                return $q.reject(error.data.Message);
+            });
+    };
+
     var deleteTask = function (id) {
         return $http.delete("/api/Task/" + id)
             .then(function (response) {
@@ -25,6 +34,7 @@
     return {
         getTask: getTask,
         saveTask: saveTask,
+        createTask: createTask,
         deleteTask: deleteTask
     };
 });
