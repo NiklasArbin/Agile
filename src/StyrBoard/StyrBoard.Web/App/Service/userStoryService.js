@@ -1,12 +1,12 @@
 ﻿agile.kanbanBoardApp.service('userStoryService', function ($http, $q) {
-    var getTask = function(location) {
+    var get = function(location) {
         return $http.get(location).then(function(response) {
             return response.data;
         }, function(error) {
             return $q.reject(error.data.Message);
         });
     };
-    var saveTask = function (task) {
+    var put = function (task) {
         return $http.put("/api/UserStory/" + task.Id, task )
             .then(function (response) {
                 return response.status == 200;
@@ -14,7 +14,7 @@
                 return $q.reject(error.data.Message);
             });
     };
-    var createTask = function (task) {
+    var post = function (task) {
         return $http.post("/api/UserStory", task)
             .then(function (response) {
             return response.headers('location');
@@ -23,7 +23,7 @@
             });
     };
 
-    var deleteTask = function (id) {
+    var deleteUserStory = function (id) {
         return $http.delete("/api/UserStory/" + id)
             .then(function (response) {
                 return response.status == 200;
@@ -32,9 +32,9 @@
             });
     };
     return {
-        getTask: getTask,
-        saveTask: saveTask,
-        createTask: createTask,
-        deleteTask: deleteTask
+        get: get,
+        put: put,
+        post: post,
+        deleteUserStory: deleteUserStory
     };
 });

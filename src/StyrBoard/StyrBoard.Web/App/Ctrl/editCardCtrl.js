@@ -8,20 +8,20 @@
         $mdDialog.cancel();
     };
     $scope.save = function (task) {
-        userStoryService.saveTask(task);
+        userStoryService.put(task);
         boardService.notifyCardUpdated(task.Id);
         $mdDialog.hide();
     };
     $scope.create = function (task) {
-        userStoryService.createTask(task)
+        userStoryService.post(task)
             .then(function (location) {
                 boardService.notifyCardAdded(location);
                 $mdDialog.hide();
         });
     };
-    $scope.delete = function (id) {
-        userStoryService.deleteTask(id);
+    $scope.deleteUserStory = function (id) {
+        userStoryService.deleteUserStory(id);
         boardService.notifyCardDeleted(id);
-        $mdDialog.hide('delete');
+        $mdDialog.hide('remove');
     };
 });

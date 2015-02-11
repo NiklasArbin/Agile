@@ -6,7 +6,7 @@
         </md-toolbar>
         <div flex data-as-sortable="dragControlListeners" data-ng-model="col.Tasks">
             <md-card class="card" data-as-sortable-item ng-repeat="task in col.Tasks" ng-dblclick="editCard($event, task)">
-                <div data-as-sortable-item-handle>
+                <md-card-content data-as-sortable-item-handle>
                     <div layout="row">
                         <div>
                             <h4>{{task.Name}}</h4>
@@ -34,7 +34,7 @@
                         <span>Four</span>
                     </div>
                     <md-progress-linear md-mode="determinate" ng-value="66"></md-progress-linear>
-                </div>
+                </md-card-content>
             </md-card>
         </div>
     </div>
