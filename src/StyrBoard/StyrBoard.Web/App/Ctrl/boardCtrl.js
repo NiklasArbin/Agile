@@ -1,6 +1,6 @@
 ﻿var agileControllers = angular.module('agileControllers', []);
 
-agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService, taskService) {
+agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService, userStoryService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
@@ -76,7 +76,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     }
 
     $scope.addCard = function (location) {
-        taskService.getTask(location).then(function (card) {
+        userStoryService.get(location).then(function (card) {
             var columnIndex = $scope.getColumnIndexById(card.ColumnId);
             $scope.columns[columnIndex].Tasks.push(card);
         });
@@ -109,7 +109,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             locals: { card: card }
         })
             .then(function (action) {
-                if (action === 'delete') {
+                if (action === 'remove') {
                     $scope.deleteCard(card.Id);
                     toast('Card deleted successfully');
                 }
@@ -120,7 +120,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     };
 
     $rootScope.$on('addNew', function (e) {
-        var card = { Id: -1, Name: 'new', Description: 'body' }
+        var card = { Name: 'new', Description: 'body' }
         $scope.editCard(e, card);
     });
 
@@ -136,13 +136,13 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         toast('Card updated successfully');
     });
 
-    // Listen to the 'deleteCard' event and delete the card as a result
+    // Listen to the 'deleteCard' event and remove the card as a result
     $rootScope.$on("cardDeleted", function (evt, id) {
         $scope.deleteCard(id);
         toast('Card deleted successfully');
     });
 
-    // Listen to the 'deleteCard' event and delete the card as a result
+    // Listen to the 'deleteCard' event and remove the card as a result
     $rootScope.$on("cardAdded", function (evt, location) {
         $scope.addCard(location);
         toast('Card added successfully');
