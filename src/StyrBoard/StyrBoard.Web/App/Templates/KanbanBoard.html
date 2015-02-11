@@ -4,8 +4,8 @@
         <md-toolbar>
             <span class="md-toolbar-tools">{{col.Name}}</span>
         </md-toolbar>
-        <div flex data-as-sortable="dragControlListeners" data-ng-model="col.Tasks">
-            <md-card class="card" data-as-sortable-item ng-repeat="task in col.Tasks" ng-dblclick="editCard($event, task)">
+        <div flex data-as-sortable="dragControlListeners" data-ng-model="col.Cards">
+            <md-card class="card" data-as-sortable-item ng-repeat="task in col.Cards" ng-dblclick="editCard($event, task)">
                 <md-card-content data-as-sortable-item-handle>
                     <div layout="row">
                         <div>

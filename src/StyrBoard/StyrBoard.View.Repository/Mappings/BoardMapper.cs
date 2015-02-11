@@ -8,15 +8,15 @@ namespace StyrBoard.View.Repository.Mappings
 {
     public static class BoardMapper
     {
-        public static Model.Task ToViewModel(this UserStory domainModel)
+        public static Model.Card ToViewModel(this UserStory domainModel)
         {
-            return new Model.Task
+            return new Model.Card
             {
                 Name = domainModel.Title,
                 Description = domainModel.Description,
                 Id = domainModel.Id,
                 DisplayId = domainModel.DisplayId,
-                ColumnId = domainModel.State.Id
+                ColumnId = domainModel.State.Id,
                 Points = domainModel.Points
             };
         }
@@ -33,12 +33,13 @@ namespace StyrBoard.View.Repository.Mappings
                 if (column == null)
                     column = result.Columns.Single(s => s.Name == "Open");
 
-                column.Tasks.Add(new View.Model.Task()
+                column.Cards.Add(new View.Model.Card()
                 {
+                    Id = userStory.Id,
+                    DisplayId = userStory.DisplayId,
                     ColumnId = column.Id,
                     Name = userStory.Title,
-                    Id = userStory.Id,
-                    DisplayId = userStory.DisplayId
+                    Description = userStory.Description,
                     Points = userStory.Points
                 });
             }

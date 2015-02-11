@@ -3,15 +3,15 @@ using System.Linq;
 using Raven.Client;
 using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository;
+using StyrBoard.View.Model;
 using StyrBoard.View.Repository.Mappings;
-using Task = StyrBoard.View.Model.Task;
 
 namespace StyrBoard.View.Repository
 {
     public interface ICardRepository
     {
-        Task Get(int id);
-        Task Get(Guid id);
+        Card Get(int id);
+        Card Get(Guid id);
     }
 
     public class CardRepository : ICardRepository
@@ -25,7 +25,7 @@ namespace StyrBoard.View.Repository
             _userStoryRepository = userStoryRepository;
         }
 
-        public Task Get(int id)
+        public Card Get(int id)
         {
             using (var session = _documentStore.OpenSession())
             {
@@ -34,7 +34,7 @@ namespace StyrBoard.View.Repository
             }
         }
 
-        public Task Get(Guid id)
+        public Card Get(Guid id)
         {
 
             var us = _userStoryRepository.Get(id);

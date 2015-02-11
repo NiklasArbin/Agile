@@ -5,7 +5,6 @@ using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository;
 using StyrBoard.View.Model;
 using StyrBoard.View.Repository.Mappings;
-using Task = StyrBoard.View.Model.Task;
 
 namespace StyrBoard.View.Repository
 {

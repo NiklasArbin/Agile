@@ -44,17 +44,17 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
 
     $scope.getCardById = function (id) {
         for (var i = 0; i < $scope.columns.length; i += 1) {
-            for (var j = 0; j < $scope.columns[i].Tasks.length; j += 1) {
-                if ($scope.columns[i].Tasks[j].Id === id) {
-                    return $scope.columns[i].Tasks[j];
+            for (var j = 0; j < $scope.columns[i].Cards.length; j += 1) {
+                if ($scope.columns[i].Cards[j].Id === id) {
+                    return $scope.columns[i].Cards[j];
                 }
             }
         }
     };
     $scope.getCardIndexById = function (id) {
         for (var i = 0; i < $scope.columns.length; i += 1) {
-            for (var j = 0; j < $scope.columns[i].Tasks.length; j += 1) {
-                if ($scope.columns[i].Tasks[j].Id === id) {
+            for (var j = 0; j < $scope.columns[i].Cards.length; j += 1) {
+                if ($scope.columns[i].Cards[j].Id === id) {
                     return j;
                 }
             }
@@ -72,13 +72,13 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         var currentCard = $scope.getCardById(id);
         var columnIndex = $scope.getColumnIndexById(currentCard.ColumnId);
         var cardIndex = $scope.getCardIndexById(id);
-        $scope.columns[columnIndex].Tasks.splice(cardIndex, 1);
+        $scope.columns[columnIndex].Cards.splice(cardIndex, 1);
     }
 
     $scope.addCard = function (location) {
         userStoryService.get(location).then(function (card) {
             var columnIndex = $scope.getColumnIndexById(card.ColumnId);
-            $scope.columns[columnIndex].Tasks.push(card);
+            $scope.columns[columnIndex].Cards.push(card);
         });
     }
 
@@ -90,8 +90,8 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             var targetColumnIndex = $scope.getColumnIndexById(card.ColumnId);
             var sourceCardIndex = $scope.getCardIndexById(currentCard.Id);
 
-            $scope.columns[sourceColumnIndex].Tasks.splice(sourceCardIndex, 1);
-            $scope.columns[targetColumnIndex].Tasks.push(card);
+            $scope.columns[sourceColumnIndex].Cards.splice(sourceCardIndex, 1);
+            $scope.columns[targetColumnIndex].Cards.push(card);
         } else {
             //only card data has been updated
             currentCard.Name = card.Name;

@@ -16,15 +16,14 @@ namespace StyrBoard.View.Model
     {
         public Column()
         {
-            Tasks = new List<Task>();
+            Cards = new List<Card>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public List<Task> Tasks { get; set; }
+        public List<Card> Cards { get; set; }
     }
 
-    public class Task
+    public class Card
     {
         public Guid Id { get; set; }
         public int DisplayId { get; set; }
