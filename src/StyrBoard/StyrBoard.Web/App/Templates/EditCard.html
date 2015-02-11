@@ -2,7 +2,10 @@
     <md-content class="card-edit">
         <div layout="row">
             <div flex>
-                <md-text-float class="title" type="text" label="Title" ng-model="task.Name"> </md-text-float>
+                <md-input-container>
+                    <label>Title</label>
+                    <input ng-model="task.Name"/>
+                </md-input-container>
                 <textarea cols="200" rows="30" ng-model="task.Description"></textarea>
             </div>
         </div>
