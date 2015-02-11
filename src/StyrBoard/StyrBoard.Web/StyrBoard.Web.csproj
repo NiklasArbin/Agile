@@ -197,7 +197,7 @@
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HubController.cs" />
-    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\UserStoryController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,7 +221,7 @@
     <Content Include="App\Ctrl\editCardCtrl.js" />
     <Content Include="App\Ctrl\menuCtrl.js" />
     <Content Include="App\main.js" />
-    <Content Include="App\Service\taskService.js" />
+    <Content Include="App\Service\userStoryService.js" />
     <Content Include="App\Service\boardService.js" />
     <Content Include="App\Templates\EditCard.html" />
     <Content Include="App\Templates\List.html" />
@@ -444,25 +444,6 @@
     <Content Include="bower_components\angular-material\modules\js\whiteframe\whiteframe.js" />
     <Content Include="bower_components\angular-material\modules\js\whiteframe\whiteframe.min.css" />
     <Content Include="bower_components\angular-material\modules\js\whiteframe\whiteframe.min.js" />
-    <Content Include="bower_components\angular-material\themes\amber-theme.css" />
-    <Content Include="bower_components\angular-material\themes\blue-grey-theme.css" />
-    <Content Include="bower_components\angular-material\themes\blue-theme.css" />
-    <Content Include="bower_components\angular-material\themes\brown-theme.css" />
-    <Content Include="bower_components\angular-material\themes\cyan-theme.css" />
-    <Content Include="bower_components\angular-material\themes\deep-orange-theme.css" />
-    <Content Include="bower_components\angular-material\themes\deep-purple-theme.css" />
-    <Content Include="bower_components\angular-material\themes\green-theme.css" />
-    <Content Include="bower_components\angular-material\themes\grey-theme.css" />
-    <Content Include="bower_components\angular-material\themes\indigo-theme.css" />
-    <Content Include="bower_components\angular-material\themes\light-blue-dark-theme.css" />
-    <Content Include="bower_components\angular-material\themes\light-green-theme.css" />
-    <Content Include="bower_components\angular-material\themes\lime-theme.css" />
-    <Content Include="bower_components\angular-material\themes\orange-theme.css" />
-    <Content Include="bower_components\angular-material\themes\pink-theme.css" />
-    <Content Include="bower_components\angular-material\themes\purple-theme.css" />
-    <Content Include="bower_components\angular-material\themes\red-theme.css" />
-    <Content Include="bower_components\angular-material\themes\teal-theme.css" />
-    <Content Include="bower_components\angular-material\themes\yellow-theme.css" />
     <Content Include="bower_components\angular-route\angular-route.js" />
     <Content Include="bower_components\angular-route\angular-route.min.js" />
     <Content Include="bower_components\angular\angular-csp.css" />

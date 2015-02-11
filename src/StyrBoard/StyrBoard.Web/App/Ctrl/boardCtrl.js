@@ -1,6 +1,6 @@
 ﻿var agileControllers = angular.module('agileControllers', []);
 
-agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService, taskService) {
+agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast, $mdDialog, $filter, boardService, userStoryService) {
     // Model
     $scope.columns = [];
     $scope.isLoading = false;
@@ -76,7 +76,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     }
 
     $scope.addCard = function (location) {
-        taskService.getTask(location).then(function (card) {
+        userStoryService.getTask(location).then(function (card) {
             var columnIndex = $scope.getColumnIndexById(card.ColumnId);
             $scope.columns[columnIndex].Tasks.push(card);
         });
@@ -120,7 +120,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     };
 
     $rootScope.$on('addNew', function (e) {
-        var card = { Id: -1, Name: 'new', Description: 'body' }
+        var card = { Name: 'new', Description: 'body' }
         $scope.editCard(e, card);
     });
 

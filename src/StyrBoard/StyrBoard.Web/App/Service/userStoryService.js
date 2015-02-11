@@ -1,4 +1,4 @@
-﻿agile.kanbanBoardApp.service('taskService', function ($http, $q, $rootScope) {
+﻿agile.kanbanBoardApp.service('userStoryService', function ($http, $q) {
     var getTask = function(location) {
         return $http.get(location).then(function(response) {
             return response.data;
@@ -7,7 +7,7 @@
         });
     };
     var saveTask = function (task) {
-        return $http.put("/api/Task/" + task.Id, task )
+        return $http.put("/api/UserStory/" + task.Id, task )
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {
@@ -15,7 +15,7 @@
             });
     };
     var createTask = function (task) {
-        return $http.post("/api/Task", task)
+        return $http.post("/api/UserStory", task)
             .then(function (response) {
             return response.headers('location');
         }, function (error) {
@@ -24,7 +24,7 @@
     };
 
     var deleteTask = function (id) {
-        return $http.delete("/api/Task/" + id)
+        return $http.delete("/api/UserStory/" + id)
             .then(function (response) {
                 return response.status == 200;
             }, function (error) {

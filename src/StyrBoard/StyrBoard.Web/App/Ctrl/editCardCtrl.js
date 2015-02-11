@@ -1,6 +1,6 @@
-﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, taskService, boardService, card) {
+﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, userStoryService, boardService, card) {
     $scope.task = card;
-    $scope.isNew = card.Id < 0;
+    $scope.isNew = !card.Id;
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -8,19 +8,19 @@
         $mdDialog.cancel();
     };
     $scope.save = function (task) {
-        taskService.saveTask(task);
+        userStoryService.saveTask(task);
         boardService.notifyCardUpdated(task.Id);
         $mdDialog.hide();
     };
     $scope.create = function (task) {
-        taskService.createTask(task)
+        userStoryService.createTask(task)
             .then(function (location) {
                 boardService.notifyCardAdded(location);
                 $mdDialog.hide();
         });
     };
     $scope.delete = function (id) {
-        taskService.deleteTask(id);
+        userStoryService.deleteTask(id);
         boardService.notifyCardDeleted(id);
         $mdDialog.hide('delete');
     };
