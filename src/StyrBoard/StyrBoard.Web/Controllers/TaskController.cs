@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -24,49 +23,29 @@ namespace StyrBoard.Web.Controllers
         }
 
         // GET: api/Task/5
-        public HttpResponseMessage Get(Guid id)
-        {
-            var response = Request.CreateResponse();
-            var card = _cardRepository.Get(id);
-            response.Content = new StringContent(JsonConvert.SerializeObject(card));
-            response.StatusCode = HttpStatusCode.OK;
-            return response;
-        }
+        //public HttpResponseMessage Get(Guid id)
+        //{
+        //    var response = Request.CreateResponse();
+        //    var card = _cardRepository.Get(id);
+        //    response.Content = new StringContent(JsonConvert.SerializeObject(card));
+        //    response.StatusCode = HttpStatusCode.OK;
+        //    return response;
+        //}
 
         // POST: api/Task
         public HttpResponseMessage Post(JObject value)
         {
-            var task = JsonConvert.DeserializeObject<View.Model.Task>(value.ToString());
+            var newTask = JsonConvert.DeserializeObject<View.Model.Task>(value.ToString());
             var response = Request.CreateResponse();
 
-            var story = new UserStory
-            {
-                Description = task.Description,
-                Title = task.Name,
-                State = new State { Name = "Open", Id = 1},
-            };
+            var story = _userStoryRepository.Get(newTask.UserStoryId);
+            story.AddTask(new Task { Title = newTask.Name });
+
             _userStoryRepository.Save(story);
-            
+
             response.StatusCode = HttpStatusCode.Created;
             response.Headers.Location = new Uri(string.Format("{0}/{1}", Request.RequestUri, story.Id));
             return response;
-        }
-
-        // PUT: api/Task/5
-        public void Put(Guid id, JObject value)
-        {
-            var task = JsonConvert.DeserializeObject<View.Model.Task>(value.ToString());
-            var userStory = _userStoryRepository.Get(id);
-            userStory.State = State.GetDefaultStates().Single(x => x.Id == task.ColumnId);
-            userStory.Description = task.Description;
-            userStory.Title = task.Name;
-            _userStoryRepository.Save(userStory);
-        }
-
-        // DELETE: api/Task/5
-        public void Delete(Guid id)
-        {
-            _userStoryRepository.Delete(id);
         }
     }
 }

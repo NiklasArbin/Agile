@@ -1,23 +1,45 @@
 ﻿<md-dialog style="width:70%">
     <md-content class="card-edit">
-        <div layout="row" layout-fill layout-margin>
-            <div flex>
+
+        <md-tabs md-selected="tabs.selectedIndex">
+            <md-tab id="tab1" aria-controls="tab1-content">
+                Details
+            </md-tab>
+            <md-tab id="tab2" aria-controls="tab2-content">
+                Tasks
+            </md-tab>
+        </md-tabs>
+        <ng-switch on="tabs.selectedIndex" class="tabpanel-container">
+            <div role="tabpanel" id="tab1-content" aria-labelledby="tab1" ng-switch-when="0" md-swipe-left="next()" md-swipe-right="previous()">
+                <div layout="row" layout-fill layout-margin>
+                    <div flex>
+                        <md-input-container>
+                            <label>Title</label>
+                            <input ng-model="card.Name" />
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Description</label>
+                            <textarea ng-model="card.Description" md-maxlength="4000"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div flex="20">
+                        <md-input-container>
+                            <label>Points</label>
+                            <input ng-model="card.Points" />
+                        </md-input-container>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" id="tab2-content" aria-labelledby="tab2" ng-switch-when="1" md-swipe-left="next()" md-swipe-right="previous()">
                 <md-input-container>
-                    <label>Title</label>
-                    <input ng-model="card.Name" />
-                </md-input-container>
-                <md-input-container>
-                    <label>Description</label>
-                    <textarea ng-model="card.Description" md-maxlength="4000"></textarea>
+                    <label>Add new Task</label>
+                    <input ng-keyup="createTask($event)" />
                 </md-input-container>
             </div>
-            <div flex="20">
-                <md-input-container>
-                    <label>Points</label>
-                    <input ng-model="card.Points" />
-                </md-input-container>
-            </div>
-        </div>
+        </ng-switch>
+
+
+
         <div class="md-actions" layout="row">
             <md-button ng-click="deleteUserStory(card.Id)" class="md-warn" ng-hide="isNew">
                 Delete

@@ -1,13 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Net.Configuration;
 using StyrBoard.Domain.Model;
 using StyrBoard.View.Model;
+using Task = StyrBoard.View.Model.Task;
 
 
 namespace StyrBoard.View.Repository.Mappings
 {
     public static class BoardMapper
     {
+        public static List<Task> ToViewModel(this IEnumerable<Domain.Model.Task> domainModel, UserStory story)
+        {
+            return domainModel.Select(x => new Task
+            {
+                Description = x.Description,
+                Name = x.Title,
+                UserStoryId = x.Id
+            }).ToList();
+            
+        }
         public static Model.Card ToViewModel(this UserStory domainModel)
         {
             return new Model.Card
@@ -33,14 +45,15 @@ namespace StyrBoard.View.Repository.Mappings
                 if (column == null)
                     column = result.Columns.Single(s => s.Name == "Open");
 
-                column.Cards.Add(new View.Model.Card()
+                column.Cards.Add(new Card()
                 {
                     Id = userStory.Id,
                     DisplayId = userStory.DisplayId,
                     ColumnId = column.Id,
                     Name = userStory.Title,
                     Description = userStory.Description,
-                    Points = userStory.Points
+                    Points = userStory.Points,
+                    Tasks = userStory.Tasks.ToViewModel(userStory)
                 });
             }
 

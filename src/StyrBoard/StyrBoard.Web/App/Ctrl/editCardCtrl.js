@@ -1,6 +1,7 @@
-﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, userStoryService, boardService, card) {
+﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, userStoryService, boardService, taskService, card) {
     $scope.card = card;
     $scope.isNew = !card.Id;
+    $scope.tabs = { selectedIndex: 0 };
     $scope.hide = function () {
         $mdDialog.hide();
     };
@@ -17,7 +18,12 @@
             .then(function (location) {
                 boardService.notifyCardAdded(location);
                 $mdDialog.hide();
-        });
+            });
+    };
+    $scope.createTask = function (evt) {
+        if (evt.keyCode === 13) {
+            taskService.post({ Name: evt.currentTarget.value, UserStoryId: card.Id });
+        }
     };
     $scope.deleteUserStory = function (id) {
         userStoryService.deleteUserStory(id);

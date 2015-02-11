@@ -16,7 +16,7 @@ namespace StyrBoard.Domain.Model
         public int DisplayId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public List<Task> Tasks { get; set; }
+        public List<Task> Tasks { get; private set; }
         public int SprintId { get; set; }
         public List<Impediment> Impediments { get; private set; }
         public State State { get; set; }
@@ -25,6 +25,11 @@ namespace StyrBoard.Domain.Model
         public void MoveTo(State newState)
         {
             this.State = newState;
+        }
+
+        public void AddTask(Task task)
+        {
+            Tasks.Add(task);
         }
     }
 }
