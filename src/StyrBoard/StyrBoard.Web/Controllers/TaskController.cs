@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -59,13 +60,14 @@ namespace StyrBoard.Web.Controllers
         }
 
         // PUT: api/Task/5
-        public void Put(int id, JObject value)
+        public void Put(Guid id, JObject value)
         {
-            //var task = JsonConvert.DeserializeObject<Task>(value.ToString());
-            //var taskToUpdate = _boardRepository.GetTask(id);
-            //taskToUpdate.ColumnId = task.ColumnId;
-            //taskToUpdate.Description = task.Description;
-            //taskToUpdate.Name = task.Name;
+            var task = JsonConvert.DeserializeObject<Task>(value.ToString());
+            var userStory = _userStoryRepository.Get(id);
+            userStory.State = State.GetDefaultStates().Single(x => x.Id == task.ColumnId);
+            userStory.Description = task.Description;
+            userStory.Title = task.Name;
+            _userStoryRepository.Save(userStory);
         }
 
         // DELETE: api/Task/5
