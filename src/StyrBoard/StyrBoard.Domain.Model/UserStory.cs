@@ -20,6 +20,7 @@ namespace StyrBoard.Domain.Model
         public int SprintId { get; set; }
         public List<Impediment> Impediments { get; private set; }
         public State State { get; set; }
+        public int Points { get; set; }
 
         public void MoveTo(State newState)
         {

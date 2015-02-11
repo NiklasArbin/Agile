@@ -17,6 +17,7 @@ namespace StyrBoard.View.Repository.Mappings
                 Id = domainModel.Id,
                 DisplayId = domainModel.DisplayId,
                 ColumnId = domainModel.State.Id
+                Points = domainModel.Points
             };
         }
         public static Board ToViewModel(this List<UserStory> domainModel)
@@ -38,6 +39,7 @@ namespace StyrBoard.View.Repository.Mappings
                     Name = userStory.Title,
                     Id = userStory.Id,
                     DisplayId = userStory.DisplayId
+                    Points = userStory.Points
                 });
             }
 
