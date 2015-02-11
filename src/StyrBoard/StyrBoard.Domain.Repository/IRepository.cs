@@ -8,5 +8,6 @@ namespace StyrBoard.Domain.Repository
         T Get(Guid id);
         T Get(int id);
         void Save(T item);
+        void Delete(Guid id);
     }
 }

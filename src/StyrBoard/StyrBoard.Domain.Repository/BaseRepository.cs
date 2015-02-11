@@ -56,6 +56,15 @@ namespace StyrBoard.Domain.Repository
             }
         }
 
+        public void Delete(Guid id)
+        {
+            using (var session = _store.OpenSession())
+            {
+                session.Delete<T>(id);
+                session.SaveChanges();
+            }
+        }
+
         protected virtual void BeforeSave(T item, IDocumentSession session)
         {}
     }

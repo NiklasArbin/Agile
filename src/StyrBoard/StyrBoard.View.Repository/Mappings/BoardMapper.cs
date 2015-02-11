@@ -2,19 +2,20 @@
 using System.Linq;
 using StyrBoard.Domain.Model;
 using StyrBoard.View.Model;
-using Task = StyrBoard.View.Model.Task;
+
 
 namespace StyrBoard.View.Repository.Mappings
 {
     public static class BoardMapper
     {
-        public static Task ToViewModel(this UserStory domainModel)
+        public static Model.Task ToViewModel(this UserStory domainModel)
         {
-            return new Task
+            return new Model.Task
             {
                 Name = domainModel.Title,
                 Description = domainModel.Description,
-                Id = domainModel.DisplayId,
+                Id = domainModel.Id,
+                DisplayId = domainModel.DisplayId,
                 ColumnId = domainModel.State.Id
             };
         }
@@ -35,7 +36,8 @@ namespace StyrBoard.View.Repository.Mappings
                 {
                     ColumnId = column.Id,
                     Name = userStory.Title,
-                    Id = userStory.DisplayId
+                    Id = userStory.Id,
+                    DisplayId = userStory.DisplayId
                 });
             }
 
