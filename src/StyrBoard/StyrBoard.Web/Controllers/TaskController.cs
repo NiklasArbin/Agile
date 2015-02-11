@@ -49,7 +49,7 @@ namespace StyrBoard.Web.Controllers
             {
                 Description = task.Description,
                 Title = task.Name,
-                State = new State { Name = "Open" },
+                State = new State { Name = "Open", Id = 1},
             };
             _userStoryRepository.Save(story);
             

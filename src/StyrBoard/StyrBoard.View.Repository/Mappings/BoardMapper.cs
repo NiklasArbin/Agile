@@ -14,7 +14,8 @@ namespace StyrBoard.View.Repository.Mappings
             {
                 Name = domainModel.Title,
                 Description = domainModel.Description,
-                Id = domainModel.DisplayId
+                Id = domainModel.DisplayId,
+                ColumnId = domainModel.State.Id
             };
         }
         public static Board ToViewModel(this List<UserStory> domainModel)
@@ -46,7 +47,7 @@ namespace StyrBoard.View.Repository.Mappings
             return State.GetDefaultStates().Select(state => new Column()
             {
                 Name = state.Name,
-                Id = state.Id
+                Id = state.Id,
             }).ToList();
         }
     }

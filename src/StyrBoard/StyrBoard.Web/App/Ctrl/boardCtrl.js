@@ -76,8 +76,10 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     }
 
     $scope.addCard = function (location) {
-        var card = taskService.getTask(location);
-
+        taskService.getTask(location).then(function (card) {
+            var columnIndex = $scope.getColumnIndexById(card.ColumnId);
+            $scope.columns[columnIndex].Tasks.push(card);
+        });
     }
 
     $scope.updateCard = function (card) {
