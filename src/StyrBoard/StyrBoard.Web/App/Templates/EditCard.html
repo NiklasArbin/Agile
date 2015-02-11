@@ -1,4 +1,4 @@
-﻿<md-dialog>
+﻿<md-dialog style="width:70%">
     <md-content class="card-edit">
         <div layout="row">
             <div flex>
@@ -6,7 +6,10 @@
                     <label>Title</label>
                     <input ng-model="task.Name"/>
                 </md-input-container>
-                <textarea cols="200" rows="30" ng-model="task.Description"></textarea>
+                <md-input-container>
+                    <label>Description</label>
+                    <textarea ng-model="task.Description" md-maxlength="4000"></textarea>
+                </md-input-container>
             </div>
         </div>
         <div class="md-actions" layout="row">
