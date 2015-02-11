@@ -9,7 +9,6 @@ using Newtonsoft.Json.Linq;
 using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository;
 using StyrBoard.View.Repository;
-using Task = StyrBoard.View.Model.Task;
 
 namespace StyrBoard.Web.Controllers
 {
@@ -22,12 +21,6 @@ namespace StyrBoard.Web.Controllers
         {
             _userStoryRepository = userStoryRepository;
             _cardRepository = cardRepository;
-        }
-
-        // GET: api/Task
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
         }
 
         // GET: api/Task/5
@@ -43,7 +36,7 @@ namespace StyrBoard.Web.Controllers
         // POST: api/Task
         public HttpResponseMessage Post(JObject value)
         {
-            var task = JsonConvert.DeserializeObject<Task>(value.ToString());
+            var task = JsonConvert.DeserializeObject<View.Model.Task>(value.ToString());
             var response = Request.CreateResponse();
 
             var story = new UserStory
@@ -62,7 +55,7 @@ namespace StyrBoard.Web.Controllers
         // PUT: api/Task/5
         public void Put(Guid id, JObject value)
         {
-            var task = JsonConvert.DeserializeObject<Task>(value.ToString());
+            var task = JsonConvert.DeserializeObject<View.Model.Task>(value.ToString());
             var userStory = _userStoryRepository.Get(id);
             userStory.State = State.GetDefaultStates().Single(x => x.Id == task.ColumnId);
             userStory.Description = task.Description;
