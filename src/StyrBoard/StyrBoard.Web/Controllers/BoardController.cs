@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -45,8 +46,8 @@ namespace StyrBoard.Web.Controllers
         public HttpResponseMessage MoveTask(JObject moveTaskParams)
         {
             dynamic json = moveTaskParams;
-
-            var userStory = _userStoryRepository.Get((int) json.taskId);
+            var id = (Guid)(json.taskId);
+            var userStory = _userStoryRepository.Get(id);
 
             var newState = State.GetDefaultStates().Single(s => s.Id == (int) json.targetColId);
             userStory.MoveTo(newState);

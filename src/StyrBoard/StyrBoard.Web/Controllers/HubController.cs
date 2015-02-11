@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.SignalR;
+﻿using System;
+using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using StyrBoard.View.Model;
 using StyrBoard.View.Repository;
@@ -22,15 +23,15 @@ namespace StyrBoard.Web.Controllers
             Clients.AllExcept(new []{Context.ConnectionId}).BoardUpdated();
         }
 
-        public void NotifyCardUpdated(int taskId)
+        public void NotifyCardUpdated(Guid id)
         {
-            var task = _cardRepository.Get(taskId);
+            var task = _cardRepository.Get(id);
             Clients.AllExcept(new[] { Context.ConnectionId }).CardUpdated(task);
         }
 
-        public void NotifyCardDeleted(int taskId)
+        public void NotifyCardDeleted(Guid id)
         {
-            Clients.AllExcept(new[] { Context.ConnectionId }).CardDeleted(taskId);
+            Clients.AllExcept(new[] { Context.ConnectionId }).CardDeleted(id);
         }
 
         public void NotifyCardAdded(string location)
