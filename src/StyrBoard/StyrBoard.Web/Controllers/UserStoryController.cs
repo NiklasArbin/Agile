@@ -35,15 +35,17 @@ namespace StyrBoard.Web.Controllers
         // POST: api/UserStory
         public HttpResponseMessage Post(JObject value)
         {
-            var task = JsonConvert.DeserializeObject<View.Model.Card>(value.ToString());
+            var card = JsonConvert.DeserializeObject<View.Model.Card>(value.ToString());
             var response = Request.CreateResponse();
 
             var story = new UserStory
             {
-                Description = task.Description,
-                Title = task.Name,
+                Description = card.Description,
+                Title = card.Name,
                 State = new State { Name = "Open", Id = 1},
+                Points = card.Points
             };
+
             _userStoryRepository.Save(story);
             
             response.StatusCode = HttpStatusCode.Created;
@@ -54,11 +56,12 @@ namespace StyrBoard.Web.Controllers
         // PUT: api/UserStory/5
         public void Put(Guid id, JObject value)
         {
-            var task = JsonConvert.DeserializeObject<View.Model.Card>(value.ToString());
+            var card = JsonConvert.DeserializeObject<View.Model.Card>(value.ToString());
             var userStory = _userStoryRepository.Get(id);
-            userStory.State = State.GetDefaultStates().Single(x => x.Id == task.ColumnId);
-            userStory.Description = task.Description;
-            userStory.Title = task.Name;
+            userStory.State = State.GetDefaultStates().Single(x => x.Id == card.ColumnId);
+            userStory.Description = card.Description;
+            userStory.Title = card.Name;
+            userStory.Points = card.Points;
             _userStoryRepository.Save(userStory);
         }
 

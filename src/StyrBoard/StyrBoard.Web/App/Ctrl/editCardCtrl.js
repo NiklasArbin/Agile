@@ -1,5 +1,5 @@
 ﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, userStoryService, boardService, card) {
-    $scope.task = card;
+    $scope.card = card;
     $scope.isNew = !card.Id;
     $scope.hide = function () {
         $mdDialog.hide();
