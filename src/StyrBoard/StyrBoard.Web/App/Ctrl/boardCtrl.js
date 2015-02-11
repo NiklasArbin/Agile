@@ -5,6 +5,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     $scope.columns = [];
     $scope.isLoading = false;
 
+
     function init() {
         $scope.isLoading = true;
         boardService.initialize().then(function (data) {
@@ -32,6 +33,15 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         //orderChanged: function (event) { },
         //containment: '#board'//optional param.
     };
+
+    $scope.sumOfPointsInColumn = function (id) {
+        var index = $scope.getColumnIndexById(id);
+        var sum = 0;
+        for (var i = 0; i < $scope.columns[index].Cards.length; i += 1) {
+            sum += $scope.columns[index].Cards[i].Points;
+        }
+        return sum;
+    }
 
     $scope.refreshBoard = function refreshBoard() {
         $scope.isLoading = true;

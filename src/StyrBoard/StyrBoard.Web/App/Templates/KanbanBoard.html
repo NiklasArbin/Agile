@@ -2,7 +2,7 @@
 
     <div id="{{col.Id}}" class="swimlane" flex layout="column" ng-repeat="col in columns" data-columnindex="{{col.Id-1}}">
         <md-toolbar>
-            <span class="md-toolbar-tools">{{col.Name}}</span>
+            <span class="md-toolbar-tools">{{col.Name}} [{{sumOfPointsInColumn(col.Id)}}pt]</span>
         </md-toolbar>
         <div flex data-as-sortable="dragControlListeners" data-ng-model="col.Cards">
             <md-card class="card" data-as-sortable-item ng-repeat="card in col.Cards" ng-dblclick="editCard($event, card)">
