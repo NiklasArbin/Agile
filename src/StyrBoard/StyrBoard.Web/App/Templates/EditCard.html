@@ -27,6 +27,9 @@
                             <label>Points</label>
                             <input ng-model="card.Points" />
                         </md-input-container>
+                        <ul ng-repeat="task in card.Tasks">
+                            <li>{{task.Name}}</li>
+                        </ul>
                     </div>
                 </div>
             </div>
