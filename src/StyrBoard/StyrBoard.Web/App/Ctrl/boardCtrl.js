@@ -91,22 +91,11 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         });
     }
 
+   
     $scope.updateCard = function (card) {
-        var currentCard = $scope.getCardById(card.Id);
-        if (card.ColumnId !== currentCard.ColumnId) {
-            //card should be moved to a new column
-            var sourceColumnIndex = $scope.getColumnIndexById(currentCard.ColumnId);
-            var targetColumnIndex = $scope.getColumnIndexById(card.ColumnId);
-            var sourceCardIndex = $scope.getCardIndexById(currentCard.Id);
-
-            $scope.columns[sourceColumnIndex].Cards.splice(sourceCardIndex, 1);
-            $scope.columns[targetColumnIndex].Cards.push(card);
-        } else {
-            //only card data has been updated
-            currentCard.Name = card.Name;
-            currentCard.Description = card.Description;
-            currentCard.ColumnId = card.ColumnId;
-        }
+        $scope.deleteCard(card.Id);
+        var columnIndex = $scope.getColumnIndexById(card.ColumnId);
+        $scope.columns[columnIndex].Cards.push(card);
     }
 
 

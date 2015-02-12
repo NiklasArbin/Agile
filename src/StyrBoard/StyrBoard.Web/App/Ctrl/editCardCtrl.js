@@ -1,5 +1,6 @@
-﻿agileControllers.controller('editCardCtrl', function ($scope, $mdDialog, $http, userStoryService, boardService, taskService, card) {
+﻿agileControllers.controller('editCardCtrl', function ($scope, $rootScope, $mdDialog, $http, userStoryService, boardService, taskService, card) {
     $scope.card = card;
+    $scope.newTaskInput = "";
     $scope.isNew = !card.Id;
     $scope.tabs = { selectedIndex: 0 };
     $scope.hide = function () {
@@ -22,7 +23,11 @@
     };
     $scope.createTask = function (evt) {
         if (evt.keyCode === 13) {
-            taskService.post({ Name: evt.currentTarget.value, UserStoryId: card.Id });
+            taskService.post({ Name: evt.currentTarget.value, UserStoryId: card.Id }).then(function () {
+                evt.currentTarget.value = "";
+                boardService.notifyCardUpdated(card.Id);
+            });
+            
         }
     };
     $scope.deleteUserStory = function (id) {
@@ -30,4 +35,9 @@
         boardService.notifyCardDeleted(id);
         $mdDialog.hide('remove');
     };
+
+    // Listen to the 'updateCard' event and refresh the card as a result
+    $rootScope.$on("cardUpdated", function (evt, updatedCard) {
+        $scope.card = updatedCard;
+    });
 });

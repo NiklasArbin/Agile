@@ -26,7 +26,7 @@ namespace StyrBoard.Web.Controllers
         public void NotifyCardUpdated(Guid id)
         {
             var task = _cardRepository.Get(id);
-            Clients.AllExcept(new[] { Context.ConnectionId }).CardUpdated(task);
+            Clients.All.CardUpdated(task);
         }
 
         public void NotifyCardDeleted(Guid id)

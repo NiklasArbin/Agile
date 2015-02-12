@@ -63,11 +63,11 @@
         this.proxy.invoke('NotifyBoardUpdated');
     };
 
-    var notifyCardUpdated = function (taskId) {
-        this.proxy.invoke('NotifyCardUpdated', taskId);
+    var notifyCardUpdated = function (id) {
+        this.proxy.invoke('NotifyCardUpdated', id);
     };
-    var notifyCardDeleted = function (taskId) {
-        this.proxy.invoke('NotifyCardDeleted', taskId);
+    var notifyCardDeleted = function (id) {
+        this.proxy.invoke('NotifyCardDeleted', id);
     };
     var notifyCardAdded = function (location) {
         this.proxy.invoke('NotifyCardAdded', location);
