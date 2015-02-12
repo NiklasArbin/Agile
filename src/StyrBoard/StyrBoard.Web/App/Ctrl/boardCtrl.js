@@ -20,13 +20,12 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
 
         //},
         itemMoved: function (event) {
-            console.log('source ' + event.source.index);
-            console.log('dest ' + event.dest.index);
-            var taskId = event.source.itemScope.modelValue.Id;
+            var card = event.source.itemScope.modelValue;
             var targetColumnId = event.dest.sortableScope.$parent.col.Id;
-            boardService.moveTask(taskId, targetColumnId).then(function (taskMoved) {
+            card.ColumnId = targetColumnId;
+            boardService.moveTask(card.Id, targetColumnId).then(function (taskMoved) {
                 $scope.isLoading = false;
-                boardService.notifyCardUpdated(taskId);
+                boardService.notifyCardUpdated(card.Id);
             }, onError);
             $scope.isLoading = true;
         },
