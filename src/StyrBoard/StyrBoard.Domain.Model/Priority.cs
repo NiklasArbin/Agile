@@ -3,7 +3,16 @@ using System.Collections.Generic;
 
 namespace StyrBoard.Domain.Model
 {
-    public class Priority
+    public interface IPriority
+    {
+        int Add(Guid id);
+        int Get(Guid id);
+        void SetPriority(Guid id, int index);
+        void InsertBefore(Guid id, Guid existing);
+        void InsertAfter(Guid id, Guid existing);
+    }
+
+    public class Priority : IPriority
     {
         public Priority()
         {
@@ -23,11 +32,11 @@ namespace StyrBoard.Domain.Model
             return Items.IndexOf(id);
         }
 
-        public void Move(Guid id, int index)
+        public void SetPriority(Guid id, int index)
         {
             if (!Items.Contains(id)) return;
 
-            var oldIndex = Items.IndexOf(id);
+            var oldIndex = Get(id);
 
             var minIndex = Math.Min(index, oldIndex);
             var maxIndex = Math.Max(index, oldIndex);
@@ -42,6 +51,17 @@ namespace StyrBoard.Domain.Model
             Items.Remove(id);
             Items.Insert(index, id);
 
+        }
+
+        public void InsertBefore(Guid id, Guid existing)
+        {
+            var index = Get(existing);
+            SetPriority(id,index);
+        }
+        public void InsertAfter(Guid id, Guid existing)
+        {
+            var index = Get(existing) +1;
+            SetPriority(id, index);
         }
         
     }
