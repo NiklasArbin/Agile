@@ -42,7 +42,6 @@
     <Compile Include="Bug.cs" />
     <Compile Include="Epic.cs" />
     <Compile Include="Feature.cs" />
-    <Compile Include="Interfaces\IHavePriority.cs" />
     <Compile Include="Interfaces\IHaveState.cs" />
     <Compile Include="Interfaces\ICanHaveImpediments.cs" />
     <Compile Include="Interfaces\IAggregateRoot.cs" />

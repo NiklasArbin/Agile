@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace StyrBoard.Domain.Model
 {
-    public class UserStory : IDescribed, IAggregateRoot, ICanHaveImpediments, IHaveState, IHavePriority
+    public class UserStory : IDescribed, IAggregateRoot, ICanHaveImpediments, IHaveState
     {
         public UserStory()
         {
@@ -21,7 +21,6 @@ namespace StyrBoard.Domain.Model
         public List<Impediment> Impediments { get; private set; }
         public State State { get; set; }
         public int Points { get; set; }
-        public int Priority { get; set; }
 
         public void MoveTo(State newState)
         {
