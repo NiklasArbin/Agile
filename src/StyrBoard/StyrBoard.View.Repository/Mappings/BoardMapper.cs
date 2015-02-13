@@ -59,6 +59,13 @@ namespace StyrBoard.View.Repository.Mappings
                 });
             }
 
+            //sort the data
+            foreach (var column in result.Columns)
+            {
+                column.Cards = column.Cards.OrderBy(c => c.Priority).ToList();
+            }
+
+
             return result;
         }
 

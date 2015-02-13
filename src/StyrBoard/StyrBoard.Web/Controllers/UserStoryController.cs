@@ -5,8 +5,10 @@ using System.Net.Http;
 using System.Web.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Raven.Client;
 using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository;
+using StyrBoard.View.Model;
 using StyrBoard.View.Repository;
 
 namespace StyrBoard.Web.Controllers
@@ -15,11 +17,15 @@ namespace StyrBoard.Web.Controllers
     {
         private readonly IRepository<UserStory> _userStoryRepository;
         private readonly ICardRepository _cardRepository;
+        private readonly IPriority _priority;
+        private readonly IDocumentStore _store;
 
-        public UserStoryController(IRepository<UserStory> userStoryRepository, ICardRepository cardRepository)
+        public UserStoryController(IRepository<UserStory> userStoryRepository, ICardRepository cardRepository, IPriority priority, IDocumentStore store)
         {
             _userStoryRepository = userStoryRepository;
             _cardRepository = cardRepository;
+            _priority = priority;
+            _store = store;
         }
 
         // GET: api/UserStory/5
@@ -74,9 +80,15 @@ namespace StyrBoard.Web.Controllers
         
         
         [Route("api/UserStory/Priority/{id:guid}/{priority:int}"), HttpPut()]
-        public void ChangePriority(string id, int priority)
+        public void ChangePriority(Guid id, int priority)
         {
-            var kalle = 1;
+            using (var session = _store.OpenSession())
+            {
+                _priority.SetPriority(id, priority);
+                session.Store(_priority);
+                session.SaveChanges();
+            }
+            
         }
     }
 }

@@ -7,7 +7,9 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using Castle.Windsor.Installer;
 using Microsoft.AspNet.SignalR.Hubs;
+using Raven.Client;
 using Raven.Client.Linq;
+using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository.IoC;
 using StyrBoard.Web.IoC;
 
@@ -28,6 +30,11 @@ namespace StyrBoard.Web
             Microsoft.AspNet.SignalR.GlobalHost.DependencyResolver = signalRDependencyResolver;
             InstallInversionOfControlForWebApi();
 
+            using (var session = _container.Resolve<IDocumentStore>().OpenSession())
+            {
+               var prio = session.Load<Priority>(new Priority().Id) ?? new Priority();
+                _container.Register(Component.For<IPriority>().Instance(prio));
+            }
 
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);

@@ -33,7 +33,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             var card = event.source.itemScope.card;
             var direction = event.dest.index - event.source.index;
             var prio = $scope.getNewPriority(card, direction);
-            userStoryService.setPriority(card, prio);
+            userStoryService.setPriority(card.Id, prio);
         },
         //containment: '#board'//optional param.
     };

@@ -16,11 +16,10 @@ namespace StyrBoard.Domain.Model
     {
         public Priority()
         {
-            Id = new Guid("1915B34F-EAF8-4A84-A6EB-74C518B89270");
             Items = new List<Guid>();
         }
 
-        public Guid Id { get; private set; }
+        public Guid Id { get { return new Guid("1915B34F-EAF8-4A84-A6EB-74C518B89270"); }}
         private List<Guid> Items { get; set; }
 
         public int Add(Guid id)

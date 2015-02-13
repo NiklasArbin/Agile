@@ -236,3 +236,4 @@ src/StyrBoard/StyrBoard.Web/local.config
 src/StyrBoard/StyrBoard.Web/Raven/CompiledIndexCache/*.debug.dll
 src/StyrBoard/StyrBoard.Web/Raven/CompiledIndexCache/*.debug.dll.cs
 src/StyrBoard/StyrBoard.Web/Assemblies/**
+src/StyrBoard/StyrBoard.Web/Databases/**
