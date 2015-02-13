@@ -10,9 +10,11 @@
         $mdDialog.cancel();
     };
     $scope.save = function (task) {
-        userStoryService.put(task);
-        boardService.notifyCardUpdated(task.Id);
-        $mdDialog.hide();
+        userStoryService.put(task).then(function() {
+            boardService.notifyCardUpdated(task.Id);
+            $mdDialog.hide();
+        });
+        
     };
     $scope.create = function (task) {
         userStoryService.post(task)
@@ -31,9 +33,10 @@
         }
     };
     $scope.deleteUserStory = function (id) {
-        userStoryService.deleteUserStory(id);
-        boardService.notifyCardDeleted(id);
-        $mdDialog.hide('remove');
+        userStoryService.deleteUserStory(id).then(function() {
+            boardService.notifyCardDeleted(id);
+            $mdDialog.hide('remove');
+        });
     };
 
     // Listen to the 'updateCard' event and refresh the card as a result

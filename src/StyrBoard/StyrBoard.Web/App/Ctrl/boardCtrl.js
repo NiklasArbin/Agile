@@ -31,6 +31,9 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         },
         orderChanged: function(event) {
             var id = event.source.itemScope.card.Id;
+
+            
+
             userStoryService.setPriority(id, 123);
         },
         //containment: '#board'//optional param.
