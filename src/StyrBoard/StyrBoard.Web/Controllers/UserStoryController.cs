@@ -70,5 +70,13 @@ namespace StyrBoard.Web.Controllers
         {
             _userStoryRepository.Delete(id);
         }
+
+        
+        
+        [Route("api/Priority/{id}/{priority}"), HttpPost()]
+        public void ChangePriority(string id, int priority)
+        {
+            var balle = 1;
+        }
     }
 }

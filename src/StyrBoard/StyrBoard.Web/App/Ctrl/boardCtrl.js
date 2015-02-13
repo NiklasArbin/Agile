@@ -29,7 +29,10 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             }, onError);
             $scope.isLoading = true;
         },
-        //orderChanged: function (event) { },
+        orderChanged: function(event) {
+            var id = event.source.itemScope.card.Id;
+            userStoryService.setPriority(id, 123);
+        },
         //containment: '#board'//optional param.
     };
 
