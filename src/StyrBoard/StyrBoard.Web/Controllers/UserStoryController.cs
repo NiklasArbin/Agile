@@ -73,10 +73,10 @@ namespace StyrBoard.Web.Controllers
 
         
         
-        [Route("api/Priority/{id}/{priority}"), HttpPost()]
+        [Route("api/UserStory/Priority/{id:guid}/{priority:int}"), HttpPut()]
         public void ChangePriority(string id, int priority)
         {
-            var balle = 1;
+            var kalle = 1;
         }
     }
 }
