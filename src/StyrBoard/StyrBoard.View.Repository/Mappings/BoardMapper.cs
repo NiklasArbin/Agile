@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net.Configuration;
 using StyrBoard.Domain.Model;
 using StyrBoard.View.Model;
 using Task = StyrBoard.View.Model.Task;
@@ -20,7 +19,7 @@ namespace StyrBoard.View.Repository.Mappings
             }).ToList();
             
         }
-        public static Model.Card ToViewModel(this UserStory domainModel)
+        public static Model.Card ToViewModel(this UserStory domainModel, IPriority priority)
         {
             return new Model.Card
             {
@@ -30,10 +29,11 @@ namespace StyrBoard.View.Repository.Mappings
                 DisplayId = domainModel.DisplayId,
                 ColumnId = domainModel.State.Id,
                 Points = domainModel.Points,
+                Priority = priority.Get(domainModel.Id),
                 Tasks = domainModel.Tasks.ToViewModel(domainModel)
             };
         }
-        public static Board ToViewModel(this List<UserStory> domainModel)
+        public static Board ToViewModel(this List<UserStory> domainModel, IPriority priority)
         {
             var result = new Board
             {
@@ -54,6 +54,7 @@ namespace StyrBoard.View.Repository.Mappings
                     Name = userStory.Title,
                     Description = userStory.Description,
                     Points = userStory.Points,
+                    Priority = priority.Get(userStory.Id),
                     Tasks = userStory.Tasks.ToViewModel(userStory)
                 });
             }

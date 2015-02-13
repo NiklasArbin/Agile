@@ -18,11 +18,13 @@ namespace StyrBoard.View.Repository
     {
         private readonly IDocumentStore _documentStore;
         private readonly IRepository<UserStory> _userStoryRepository;
+        private readonly IPriority _priority;
 
-        public CardRepository(IDocumentStore documentStore, IRepository<UserStory> userStoryRepository)
+        public CardRepository(IDocumentStore documentStore, IRepository<UserStory> userStoryRepository, IPriority priority)
         {
             _documentStore = documentStore;
             _userStoryRepository = userStoryRepository;
+            _priority = priority;
         }
 
         public Card Get(int id)
@@ -30,7 +32,7 @@ namespace StyrBoard.View.Repository
             using (var session = _documentStore.OpenSession())
             {
                 var us = session.Query<UserStory>().Single(u => u.DisplayId == id);
-                return us.ToViewModel();
+                return us.ToViewModel(_priority);
             }
         }
 
@@ -38,7 +40,7 @@ namespace StyrBoard.View.Repository
         {
 
             var us = _userStoryRepository.Get(id);
-            return us.ToViewModel();
+            return us.ToViewModel(_priority);
 
         }
     }

@@ -29,15 +29,46 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             }, onError);
             $scope.isLoading = true;
         },
-        orderChanged: function(event) {
-            var id = event.source.itemScope.card.Id;
-
-            
-
-            userStoryService.setPriority(id, 123);
+        orderChanged: function (event) {
+            var card = event.source.itemScope.card;
+            var direction = event.dest.index - event.source.index;
+            var prio = $scope.getNewPriority(card, direction);
+            userStoryService.setPriority(card, prio);
         },
         //containment: '#board'//optional param.
     };
+
+    $scope.getNewPriority = function (card, direction) {
+        var colIndex = $scope.getColumnIndexById(card.ColumnId);
+        var col = $scope.columns[colIndex];
+
+        for (var i = 0; i < col.Cards.length; i += 1) {
+            if (col.Cards[i].Id === card.Id) {
+                var prio = 0;
+                if (i + 1 < col.Cards.length) {
+                    //found card below
+                    prio = col.Cards[i + 1].Priority;
+                    if (direction > 0) {
+                        //Move card down
+                        prio = prio - 1;
+                    } 
+                }
+                if (i !== 0) {
+                    //found card above
+                    prio = col.Cards[i - 1].Priority;
+                    if (direction < 0) {
+                        //Move card up
+                        prio = prio + 1;
+                    }
+                }
+                if (prio !== 0) {
+                    return prio;
+                }
+                return card.Priority;
+            }
+        }
+
+    }
 
     $scope.sumOfPointsInColumn = function (id) {
         var index = $scope.getColumnIndexById(id);
@@ -97,7 +128,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         });
     }
 
-   
+
     $scope.updateCard = function (card) {
         $scope.deleteCard(card.Id);
         var columnIndex = $scope.getColumnIndexById(card.ColumnId);

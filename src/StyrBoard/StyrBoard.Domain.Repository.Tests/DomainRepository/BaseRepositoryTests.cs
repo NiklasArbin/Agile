@@ -1,6 +1,5 @@
-﻿
+﻿using StyrBoard.Domain.Model;
 // ReSharper disable InconsistentNaming
-
 using System;
 
 using FluentAssertions;
@@ -35,7 +34,8 @@ namespace StyrBoard.Tests.DomainRepository
         [Test]
         public void Save_should_generate_integer_id_for_domainitem_when_new()
         {
-            var repo = new TestDomainRepository(_documentStore);
+
+            var repo = new TestDomainRepository(_documentStore, new Priority());
             var userStory = new TestDomainEntity
             {
                 Id = Guid.NewGuid()
@@ -50,7 +50,7 @@ namespace StyrBoard.Tests.DomainRepository
         [Test]
         public void Save_should_not_generate_new_integer_id_for_domainitem_when_existing()
         {
-            var repo = new TestDomainRepository(_documentStore);
+            var repo = new TestDomainRepository(_documentStore, new Priority());
             var entity = new TestDomainEntity
             {
                 Id = Guid.NewGuid(),

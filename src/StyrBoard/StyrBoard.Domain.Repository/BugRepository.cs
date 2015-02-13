@@ -5,8 +5,8 @@ namespace StyrBoard.Domain.Repository
 {
     public class BugRepository : BaseRepository<Bug>
     {
-        public BugRepository(IDocumentStore store)
-            : base(store, "Bugs")
+        public BugRepository(IDocumentStore store, IPriority priority)
+            : base(store, priority, "Bugs")
         { }
     }
 }

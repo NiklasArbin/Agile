@@ -12,11 +12,13 @@ namespace StyrBoard.View.Repository
     {
         private readonly IDocumentStore _documentStore;
         private readonly IRepository<UserStory> _userStoryRepository;
+        private readonly IPriority _priority;
 
-        public BoardRepository(IDocumentStore documentStore, IRepository<UserStory> userStoryRepository)
+        public BoardRepository(IDocumentStore documentStore, IRepository<UserStory> userStoryRepository, IPriority priority)
         {
             _documentStore = documentStore;
             _userStoryRepository = userStoryRepository;
+            _priority = priority;
         }
 
         public Board Get()
@@ -37,7 +39,7 @@ namespace StyrBoard.View.Repository
                 }
             }
 
-            return userStories.ToViewModel();
+            return userStories.ToViewModel(_priority);
         }
 
         private void CreateDefaultData()
