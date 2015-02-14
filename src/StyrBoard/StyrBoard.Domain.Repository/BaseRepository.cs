@@ -65,6 +65,8 @@ namespace StyrBoard.Domain.Repository
             using (var session = _store.OpenSession())
             {
                 session.Delete<T>(id);
+                _priority.Delete(id);
+                session.Store(_priority);
                 session.SaveChanges();
             }
         }

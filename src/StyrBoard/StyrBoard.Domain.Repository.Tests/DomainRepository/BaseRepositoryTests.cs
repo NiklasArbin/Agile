@@ -62,5 +62,36 @@ namespace StyrBoard.Tests.DomainRepository
             entity.Should().NotBeNull();
             entity.DisplayId.Should().Be(123454);
         }
+
+        [Test]
+        public void Save_should_set_priority()
+        {
+            var prio = new Priority();
+            var repo = new TestDomainRepository(_documentStore, prio);
+            var userStory = new TestDomainEntity
+            {
+                Id = Guid.NewGuid()
+            };
+
+            repo.Save(userStory);
+
+            userStory.Should().NotBeNull();
+            prio.Get(userStory.Id).Should().Be(0);
+        }
+        [Test]
+        public void Delete_should_remove_priority()
+        {
+            var prio = new Priority();
+            var repo = new TestDomainRepository(_documentStore, prio);
+            var userStory = new TestDomainEntity
+            {
+                Id = Guid.NewGuid()
+            };
+            repo.Save(userStory);
+            repo.Delete(userStory.Id);
+
+            userStory.Should().NotBeNull();
+            prio.Get(userStory.Id).Should().Be(-1);
+        }
     }
 }

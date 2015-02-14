@@ -7,9 +7,9 @@ namespace StyrBoard.Domain.Model
     {
         int Add(Guid id);
         int Get(Guid id);
+        void Delete(Guid id);
         void SetPriority(Guid id, int index);
-        void InsertBefore(Guid id, Guid existing);
-        void InsertAfter(Guid id, Guid existing);
+        
     }
 
     public class Priority : IPriority
@@ -33,6 +33,12 @@ namespace StyrBoard.Domain.Model
             return Items.IndexOf(id);
         }
 
+        public void Delete(Guid id)
+        {
+            if (!Items.Contains(id)) return;
+            Items.Remove(id);
+        }
+
         public void SetPriority(Guid id, int index)
         {
             if (!Items.Contains(id)) return;
@@ -53,17 +59,5 @@ namespace StyrBoard.Domain.Model
             Items.Insert(index, id);
 
         }
-
-        public void InsertBefore(Guid id, Guid existing)
-        {
-            var index = Get(existing);
-            SetPriority(id,index);
-        }
-        public void InsertAfter(Guid id, Guid existing)
-        {
-            var index = Get(existing) +1;
-            SetPriority(id, index);
-        }
-        
     }
 }
