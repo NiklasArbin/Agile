@@ -14,6 +14,7 @@ namespace StyrBoard.Web.IoC
             {
                 DataDirectory = "Data",
                 UseEmbeddedHttpServer = false
+                DefaultDatabase = "Domain",
             };
 
             documentStore.Initialize();
