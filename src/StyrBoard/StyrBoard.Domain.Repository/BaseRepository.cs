@@ -9,11 +9,13 @@ namespace StyrBoard.Domain.Repository
     public abstract class BaseRepository<T> : IRepository<T> where T : IAggregateRoot
     {
         private readonly IDocumentStore _store;
+        private readonly IPriority _priority;
         private string _tableName;
 
-        protected BaseRepository(IDocumentStore store, string tableName)
+        protected BaseRepository(IDocumentStore store, IPriority priority, string tableName)
         {
             _store = store;
+            _priority = priority;
             _tableName = tableName;
         }
 
@@ -51,6 +53,8 @@ namespace StyrBoard.Domain.Repository
                     session.Store(map);
                     item.DisplayId = map.Id;
                 }
+                _priority.Add(item.Id);
+                session.Store(_priority);
                 session.Store(item);
                 session.SaveChanges();
             }
@@ -61,6 +65,8 @@ namespace StyrBoard.Domain.Repository
             using (var session = _store.OpenSession())
             {
                 session.Delete<T>(id);
+                _priority.Delete(id);
+                session.Store(_priority);
                 session.SaveChanges();
             }
         }

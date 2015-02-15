@@ -3,7 +3,6 @@ using Castle.MicroKernel.SubSystems.Configuration;
 using Castle.Windsor;
 using Raven.Client;
 using Raven.Client.Embedded;
-using StyrBoard.View.Repository;
 
 namespace StyrBoard.Web.IoC
 {
@@ -15,6 +14,7 @@ namespace StyrBoard.Web.IoC
             {
                 DataDirectory = "Data",
                 UseEmbeddedHttpServer = false
+                DefaultDatabase = "Domain",
             };
 
             documentStore.Initialize();

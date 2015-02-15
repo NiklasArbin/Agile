@@ -49,6 +49,10 @@
             $rootScope.$emit("cardAdded", location);
         });
 
+        this.proxy.on('CardPriorityChanged', function (list) {
+            $rootScope.$emit("cardPriorityChanged", list);
+        });
+
         // Connecting to SignalR server        
         return connection.start()
         .then(function (connectionObj) {
@@ -58,11 +62,10 @@
         });
     };
 
-    // Call 'NotifyBoardUpdated' on SignalR server
+    // Call 'NotifyBoardUpdated' on SignalR server, maybe move this serverside...
     var sendRequest = function () {
         this.proxy.invoke('NotifyBoardUpdated');
     };
-
     var notifyCardUpdated = function (id) {
         this.proxy.invoke('NotifyCardUpdated', id);
     };

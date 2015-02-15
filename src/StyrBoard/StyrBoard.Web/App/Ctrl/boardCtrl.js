@@ -23,15 +23,57 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             var card = event.source.itemScope.modelValue;
             var targetColumnId = event.dest.sortableScope.$parent.col.Id;
             card.ColumnId = targetColumnId;
-            boardService.moveTask(card.Id, targetColumnId).then(function (taskMoved) {
-                $scope.isLoading = false;
-                boardService.notifyCardUpdated(card.Id);
-            }, onError);
+            var prio = $scope.getNewPriority(card, event.dest.index - event.source.index);
+            userStoryService.setPriority(card.Id, prio).then(function() {
+                boardService.moveTask(card.Id, targetColumnId).then(function (taskMoved) {
+                    $scope.isLoading = false;
+                    boardService.notifyCardUpdated(card.Id);
+                }, onError);
+            });
+            
             $scope.isLoading = true;
         },
-        //orderChanged: function (event) { },
+        orderChanged: function (event) {
+            var card = event.source.itemScope.card;
+            var direction = event.dest.index - event.source.index;
+            var prio = $scope.getNewPriority(card, direction);
+            userStoryService.setPriority(card.Id, prio);
+        },
         //containment: '#board'//optional param.
     };
+
+    $scope.getNewPriority = function (card, direction) {
+        var colIndex = $scope.getColumnIndexById(card.ColumnId);
+        var col = $scope.columns[colIndex];
+
+        for (var i = 0; i < col.Cards.length; i += 1) {
+            if (col.Cards[i].Id === card.Id) {
+                var prio = 0;
+                if (i + 1 < col.Cards.length) {
+                    //found card below
+                    prio = col.Cards[i + 1].Priority;
+                    if (direction > 0) {
+                        //Move card down
+                        prio = prio - 1;
+                    }
+                    return prio;
+                }
+                if (i !== 0) {
+                    //found card above
+                    prio = col.Cards[i - 1].Priority;
+                    if (direction <= 0) {
+                        //Move card up
+                        prio = prio + 1;
+                    }
+                }
+                if (prio !== 0) {
+                    return prio;
+                }
+                return card.Priority;
+            }
+        }
+
+    }
 
     $scope.sumOfPointsInColumn = function (id) {
         var index = $scope.getColumnIndexById(id);
@@ -91,11 +133,14 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         });
     }
 
-   
+
     $scope.updateCard = function (card) {
         $scope.deleteCard(card.Id);
         var columnIndex = $scope.getColumnIndexById(card.ColumnId);
         $scope.columns[columnIndex].Cards.push(card);
+        $scope.columns[columnIndex].Cards.sort(function(a, b) {
+            return a.Priority - b.Priority;
+        });
     }
 
 
@@ -144,6 +189,15 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
     $rootScope.$on("cardAdded", function (evt, location) {
         $scope.addCard(location);
         toast('Card added successfully');
+    });
+
+    // Listen to the 'cardPriorityChanged' event and update the card as a result
+    $rootScope.$on("cardPriorityChanged", function (evt, list) {
+        for (var i = 0; i < list.length; i += 1) {
+            var card = $scope.getCardById(list[i].Key);
+            card.Priority = list[i].Value;
+        };
+        toast('Cards changed priority successfully');
     });
 
     var toast = function (message) {

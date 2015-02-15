@@ -1,12 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Raven.Client;
 using StyrBoard.Domain.Model;
 using StyrBoard.Domain.Repository;
+using StyrBoard.View.Model;
 using StyrBoard.View.Repository;
 
 namespace StyrBoard.Web.Controllers
@@ -15,11 +19,15 @@ namespace StyrBoard.Web.Controllers
     {
         private readonly IRepository<UserStory> _userStoryRepository;
         private readonly ICardRepository _cardRepository;
+        private readonly IPriority _priority;
+        private readonly IDocumentStore _store;
 
-        public UserStoryController(IRepository<UserStory> userStoryRepository, ICardRepository cardRepository)
+        public UserStoryController(IRepository<UserStory> userStoryRepository, ICardRepository cardRepository, IPriority priority, IDocumentStore store)
         {
             _userStoryRepository = userStoryRepository;
             _cardRepository = cardRepository;
+            _priority = priority;
+            _store = store;
         }
 
         // GET: api/UserStory/5
@@ -42,12 +50,12 @@ namespace StyrBoard.Web.Controllers
             {
                 Description = card.Description,
                 Title = card.Name,
-                State = new State { Name = "Open", Id = 1},
+                State = new State { Name = "Open", Id = 1 },
                 Points = card.Points
             };
 
             _userStoryRepository.Save(story);
-            
+
             response.StatusCode = HttpStatusCode.Created;
             response.Headers.Location = new Uri(string.Format("{0}/{1}", Request.RequestUri, story.Id));
             return response;
@@ -69,6 +77,23 @@ namespace StyrBoard.Web.Controllers
         public void Delete(Guid id)
         {
             _userStoryRepository.Delete(id);
+        }
+
+
+
+        [Route("api/UserStory/Priority/{id:guid}/{priority:int}"), HttpPut()]
+        public void ChangePriority(Guid id, int priority)
+        {
+            var affectedCards = new KeyValuePair<Guid, int>[0];
+            using (var session = _store.OpenSession())
+            {
+                affectedCards = _priority.SetPriority(id, priority);
+                session.Store(_priority);
+                session.SaveChanges();
+            }
+
+            var signalRContext = GlobalHost.ConnectionManager.GetHubContext<HubController>();
+            signalRContext.Clients.All.CardPriorityChanged(affectedCards);
         }
     }
 }

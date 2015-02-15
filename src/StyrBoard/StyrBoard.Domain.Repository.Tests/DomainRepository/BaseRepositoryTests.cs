@@ -1,6 +1,5 @@
-﻿
+﻿using StyrBoard.Domain.Model;
 // ReSharper disable InconsistentNaming
-
 using System;
 
 using FluentAssertions;
@@ -35,7 +34,8 @@ namespace StyrBoard.Tests.DomainRepository
         [Test]
         public void Save_should_generate_integer_id_for_domainitem_when_new()
         {
-            var repo = new TestDomainRepository(_documentStore);
+
+            var repo = new TestDomainRepository(_documentStore, new Priority());
             var userStory = new TestDomainEntity
             {
                 Id = Guid.NewGuid()
@@ -50,7 +50,7 @@ namespace StyrBoard.Tests.DomainRepository
         [Test]
         public void Save_should_not_generate_new_integer_id_for_domainitem_when_existing()
         {
-            var repo = new TestDomainRepository(_documentStore);
+            var repo = new TestDomainRepository(_documentStore, new Priority());
             var entity = new TestDomainEntity
             {
                 Id = Guid.NewGuid(),
@@ -61,6 +61,37 @@ namespace StyrBoard.Tests.DomainRepository
             
             entity.Should().NotBeNull();
             entity.DisplayId.Should().Be(123454);
+        }
+
+        [Test]
+        public void Save_should_set_priority()
+        {
+            var prio = new Priority();
+            var repo = new TestDomainRepository(_documentStore, prio);
+            var userStory = new TestDomainEntity
+            {
+                Id = Guid.NewGuid()
+            };
+
+            repo.Save(userStory);
+
+            userStory.Should().NotBeNull();
+            prio.Get(userStory.Id).Should().Be(0);
+        }
+        [Test]
+        public void Delete_should_remove_priority()
+        {
+            var prio = new Priority();
+            var repo = new TestDomainRepository(_documentStore, prio);
+            var userStory = new TestDomainEntity
+            {
+                Id = Guid.NewGuid()
+            };
+            repo.Save(userStory);
+            repo.Delete(userStory.Id);
+
+            userStory.Should().NotBeNull();
+            prio.Get(userStory.Id).Should().Be(-1);
         }
     }
 }
