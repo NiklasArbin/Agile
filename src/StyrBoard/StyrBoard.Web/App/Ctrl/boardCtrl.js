@@ -23,7 +23,7 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             var card = event.source.itemScope.modelValue;
             var targetColumnId = event.dest.sortableScope.$parent.col.Id;
             card.ColumnId = targetColumnId;
-            var prio = $scope.getNewPriority(card, 0);
+            var prio = $scope.getNewPriority(card, event.dest.index - event.source.index);
             userStoryService.setPriority(card.Id, prio).then(function() {
                 boardService.moveTask(card.Id, targetColumnId).then(function (taskMoved) {
                     $scope.isLoading = false;
@@ -138,6 +138,9 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         $scope.deleteCard(card.Id);
         var columnIndex = $scope.getColumnIndexById(card.ColumnId);
         $scope.columns[columnIndex].Cards.push(card);
+        $scope.columns[columnIndex].Cards.sort(function(a, b) {
+            return a.Priority - b.Priority;
+        });
     }
 
 
