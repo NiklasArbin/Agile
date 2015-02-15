@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace StyrBoard.Domain.Model
 {
@@ -8,7 +9,7 @@ namespace StyrBoard.Domain.Model
         int Add(Guid id);
         int Get(Guid id);
         void Delete(Guid id);
-        void SetPriority(Guid id, int index);
+        KeyValuePair<Guid, int>[] SetPriority(Guid id, int index);
         
     }
 
@@ -39,28 +40,23 @@ namespace StyrBoard.Domain.Model
             Items.Remove(id);
         }
 
-        public void SetPriority(Guid id, int index)
+        public KeyValuePair<Guid, int>[] SetPriority(Guid id, int index)
         {
-            if (!Items.Contains(id)) return;
+            if (!Items.Contains(id)) return new KeyValuePair<Guid, int>[0];
 
             var oldIndex = Get(id);
 
-            var minIndex = Math.Min(index, oldIndex);
-            var maxIndex = Math.Max(index, oldIndex);
-
-            var changed = new List<Guid>();
-
-            for (int i = minIndex; i <= maxIndex; i++)
-            {
-                changed.Add(Items[i]);
-            }
-
-            Items.Insert(index, id);
-            if (index < oldIndex) oldIndex++;
-
             Items.RemoveAt(oldIndex);
-            
+            Items.Insert(index, id);
 
+            var changed = new Dictionary<Guid,int>();
+
+            for (var i = Math.Min(index, oldIndex); i <= Math.Max(index, oldIndex); i++)
+            {
+                changed.Add(Items[i], i);
+            }
+            
+            return changed.ToArray();
         }
     }
 }

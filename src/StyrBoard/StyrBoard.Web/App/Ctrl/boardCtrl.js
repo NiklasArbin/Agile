@@ -188,6 +188,15 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
         toast('Card added successfully');
     });
 
+    // Listen to the 'cardPriorityChanged' event and update the card as a result
+    $rootScope.$on("cardPriorityChanged", function (evt, list) {
+        for (var i = 0; i < list.length; i += 1) {
+            var card = $scope.getCardById(list[i].Key);
+            card.Priority = list[i].Value;
+        };
+        toast('Cards changed priority successfully');
+    });
+
     var toast = function (message) {
         $mdToast.show(
             $mdToast.simple()

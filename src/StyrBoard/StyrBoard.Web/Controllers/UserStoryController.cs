@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.AspNet.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Raven.Client;
@@ -48,12 +50,12 @@ namespace StyrBoard.Web.Controllers
             {
                 Description = card.Description,
                 Title = card.Name,
-                State = new State { Name = "Open", Id = 1},
+                State = new State { Name = "Open", Id = 1 },
                 Points = card.Points
             };
 
             _userStoryRepository.Save(story);
-            
+
             response.StatusCode = HttpStatusCode.Created;
             response.Headers.Location = new Uri(string.Format("{0}/{1}", Request.RequestUri, story.Id));
             return response;
@@ -77,18 +79,21 @@ namespace StyrBoard.Web.Controllers
             _userStoryRepository.Delete(id);
         }
 
-        
-        
+
+
         [Route("api/UserStory/Priority/{id:guid}/{priority:int}"), HttpPut()]
         public void ChangePriority(Guid id, int priority)
         {
+            var affectedCards = new KeyValuePair<Guid, int>[0];
             using (var session = _store.OpenSession())
             {
-                _priority.SetPriority(id, priority);
+                affectedCards = _priority.SetPriority(id, priority);
                 session.Store(_priority);
                 session.SaveChanges();
             }
-            
+
+            var signalRContext = GlobalHost.ConnectionManager.GetHubContext<HubController>();
+            signalRContext.Clients.All.CardPriorityChanged(affectedCards);
         }
     }
 }
