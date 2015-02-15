@@ -55,8 +55,11 @@ namespace StyrBoard.Domain.Model
                 changed.Add(Items[i]);
             }
 
-            Items.Remove(id);
             Items.Insert(index, id);
+            if (index < oldIndex) oldIndex++;
+
+            Items.RemoveAt(oldIndex);
+            
 
         }
     }

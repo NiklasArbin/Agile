@@ -23,10 +23,14 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
             var card = event.source.itemScope.modelValue;
             var targetColumnId = event.dest.sortableScope.$parent.col.Id;
             card.ColumnId = targetColumnId;
-            boardService.moveTask(card.Id, targetColumnId).then(function (taskMoved) {
-                $scope.isLoading = false;
-                boardService.notifyCardUpdated(card.Id);
-            }, onError);
+            var prio = $scope.getNewPriority(card, 0);
+            userStoryService.setPriority(card.Id, prio).then(function() {
+                boardService.moveTask(card.Id, targetColumnId).then(function (taskMoved) {
+                    $scope.isLoading = false;
+                    boardService.notifyCardUpdated(card.Id);
+                }, onError);
+            });
+            
             $scope.isLoading = true;
         },
         orderChanged: function (event) {
@@ -51,12 +55,13 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
                     if (direction > 0) {
                         //Move card down
                         prio = prio - 1;
-                    } 
+                    }
+                    return prio;
                 }
                 if (i !== 0) {
                     //found card above
                     prio = col.Cards[i - 1].Priority;
-                    if (direction < 0) {
+                    if (direction <= 0) {
                         //Move card up
                         prio = prio + 1;
                     }
