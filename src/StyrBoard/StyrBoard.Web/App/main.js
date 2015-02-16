@@ -10,7 +10,7 @@ agile.kanbanBoardApp.config(['$routeProvider',
         }).
         when('/list', {
             templateUrl: '/App/Templates/List.html',
-            controller: 'boardCtrl'
+            controller: 'listCtrl'
         }).
         otherwise({
             redirectTo: '/board'
