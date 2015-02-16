@@ -13,7 +13,7 @@ namespace StyrBoard.Web.IoC
             var documentStore = new EmbeddableDocumentStore
             {
                 DataDirectory = "Data",
-                UseEmbeddedHttpServer = false
+                UseEmbeddedHttpServer = false,
                 DefaultDatabase = "Domain",
             };
 
