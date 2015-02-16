@@ -192,6 +192,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App\Service\sortingService.js" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -202,6 +203,7 @@
     <Compile Include="Controllers\BoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\HubController.cs" />
+    <Compile Include="Controllers\ListController.cs" />
     <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Controllers\UserStoryController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -222,11 +224,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App\boardDragDrop.js" />
+    <Content Include="App\Ctrl\listCtrl.js" />
     <Content Include="App\Ctrl\boardCtrl.js" />
     <Content Include="App\Ctrl\editCardCtrl.js" />
     <Content Include="App\Ctrl\menuCtrl.js" />
     <Content Include="App\main.js" />
+    <Content Include="App\Service\listService.js" />
     <Content Include="App\Service\taskService.js" />
     <Content Include="App\Service\userStoryService.js" />
     <Content Include="App\Service\boardService.js" />

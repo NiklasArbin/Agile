@@ -1,4 +1,4 @@
-﻿agile.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope) {
+﻿agile.kanbanBoardApp.service('boardService', function ($http, $q, $rootScope, userStoryService) {
     var proxy = null;
 
     var getColumns = function () {
@@ -46,7 +46,9 @@
         });
 
         this.proxy.on('CardAdded', function (location) {
-            $rootScope.$emit("cardAdded", location);
+            userStoryService.get(location).then(function(card) {
+                $rootScope.$emit("cardAdded", card);
+            });
         });
 
         this.proxy.on('CardPriorityChanged', function (list) {

@@ -2,39 +2,38 @@
     <md-toolbar>
         <span class="md-toolbar-tools">Backlog</span>
     </md-toolbar>
-    <div ng-repeat="col in columns">
-        <div flex data-as-sortable="dragControlListeners" data-ng-model="col.Cards">
-            <md-card class="card" data-as-sortable-item ng-repeat="card in col.Cards" ng-dblclick="editCard($event, card)">
-                <div data-as-sortable-item-handle>
-                    <div layout="row">
-                        <div>
-                            <h4>{{card.Name}}</h4>
-                        </div>
-                        <span flex></span>
-                        <md-subheader>#{{card.Id}}</md-subheader>
+
+    <div flex data-as-sortable="dragControlListeners" data-ng-model="cards">
+        <md-card class="card" data-as-sortable-item ng-repeat="card in cards" ng-dblclick="editCard($event, card)">
+            <md-card-content data-as-sortable-item-handle>
+                <div layout="row">
+                    <div>
+                        <h4>{{card.Name}}</h4>
                     </div>
-                    <div layout="column">
-                        <md-content>{{card.Description | limitTo:255}}</md-content>
-                    </div>
-                    <div layout="row">
-                        <span flex></span>
-                        <md-button class="md-primary" ng-click="editCard($event, card)">Open</md-button>
-                    </div>
-                    <md-divider></md-divider>
-                    <div layout="row" layout-align="space-between center">
-                        <span>One</span>
-                        <span>Two</span>
-                        <span>Three</span>
-                    </div>
-                    <div layout="row" layout-align="space-between center">
-                        <span>One</span>
-                        <span>Two</span>
-                        <span>Three</span>
-                        <span>Four</span>
-                    </div>
-                    <md-progress-linear md-mode="determinate" ng-value="66"></md-progress-linear>
+                    <span flex></span>
+                    <md-subheader>#{{card.DisplayId}}</md-subheader>
                 </div>
-            </md-card>
-        </div>
+                <div layout="column">
+                    <md-content>{{card.Description | limitTo:255}}</md-content>
+                </div>
+                <div layout="row">
+                    <span flex></span>
+                    <md-button class="md-primary" ng-click="editCard($event, card)">Open</md-button>
+                </div>
+                <md-divider></md-divider>
+                <div layout="row" layout-align="space-between center">
+                    <span>{{card.Points}}pt</span>
+                    <span>Two</span>
+                    <span>{{card.Priority}}</span>
+                </div>
+                <div layout="row" layout-align="space-between center">
+                    <span>One</span>
+                    <span>Two</span>
+                    <span>Three</span>
+                    <span>Four</span>
+                </div>
+                <md-progress-linear md-mode="determinate" ng-value="66"></md-progress-linear>
+            </md-card-content>
+        </md-card>
     </div>
 </div>
