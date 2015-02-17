@@ -23,10 +23,10 @@ agileControllers.controller('boardCtrl', function ($scope, $rootScope, $mdToast,
 
     function init() {
         $scope.isLoading = true;
-        boardService.initialize().then(function (data) {
-            $scope.isLoading = false;
-            $scope.refreshBoard();
-        }, onError);
+
+        $scope.isLoading = false;
+        $scope.refreshBoard();
+
     };
 
     $scope.sumOfPointsInColumn = function (id) {

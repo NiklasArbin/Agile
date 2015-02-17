@@ -77,9 +77,10 @@
     var notifyCardAdded = function (location) {
         this.proxy.invoke('NotifyCardAdded', location);
     };
+
+    initialize();
     
     return {
-        initialize: initialize,
         sendRequest: sendRequest,
         notifyCardUpdated: notifyCardUpdated,
         notifyCardDeleted: notifyCardDeleted,
