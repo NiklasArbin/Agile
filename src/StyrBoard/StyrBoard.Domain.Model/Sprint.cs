@@ -4,6 +4,10 @@ namespace StyrBoard.Domain.Model
 {
     public class Sprint : IDescribed, IAggregateRoot
     {
+        public Sprint()
+        {
+            Id = Guid.NewGuid();
+        }
         public Guid Id { get; set; }
         public int DisplayId { get; set; }
         public string Title { get; set; }

@@ -30,28 +30,28 @@
     var initialize = function () {
 
         connection = jQuery.hubConnection();
-        this.proxy = connection.createHubProxy('MainHub');
+        proxy = connection.createHubProxy('MainHub');
 
         // Listen to the 'BoardUpdated' event that will be pushed from SignalR server
-        this.proxy.on('BoardUpdated', function () {
+        proxy.on('BoardUpdated', function () {
             $rootScope.$emit("refreshBoard");
         });
 
-        this.proxy.on('CardUpdated', function (card) {
+        proxy.on('CardUpdated', function (card) {
             $rootScope.$emit("cardUpdated", card);
         });
 
-        this.proxy.on('CardDeleted', function (id) {
+        proxy.on('CardDeleted', function (id) {
             $rootScope.$emit("cardDeleted", id);
         });
 
-        this.proxy.on('CardAdded', function (location) {
+        proxy.on('CardAdded', function (location) {
             userStoryService.get(location).then(function(card) {
                 $rootScope.$emit("cardAdded", card);
             });
         });
 
-        this.proxy.on('CardPriorityChanged', function (list) {
+        proxy.on('CardPriorityChanged', function (list) {
             $rootScope.$emit("cardPriorityChanged", list);
         });
 
@@ -66,16 +66,16 @@
 
     // Call 'NotifyBoardUpdated' on SignalR server, maybe move this serverside...
     var sendRequest = function () {
-        this.proxy.invoke('NotifyBoardUpdated');
+        proxy.invoke('NotifyBoardUpdated');
     };
     var notifyCardUpdated = function (id) {
-        this.proxy.invoke('NotifyCardUpdated', id);
+        proxy.invoke('NotifyCardUpdated', id);
     };
     var notifyCardDeleted = function (id) {
-        this.proxy.invoke('NotifyCardDeleted', id);
+        proxy.invoke('NotifyCardDeleted', id);
     };
     var notifyCardAdded = function (location) {
-        this.proxy.invoke('NotifyCardAdded', location);
+        proxy.invoke('NotifyCardAdded', location);
     };
 
     initialize();

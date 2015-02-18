@@ -30,7 +30,20 @@ namespace StyrBoard.View.Repository.Mappings
                 ColumnId = domainModel.State.Id,
                 Points = domainModel.Points,
                 Priority = priority.Get(domainModel.Id),
-                Tasks = domainModel.Tasks.ToViewModel(domainModel)
+                Tasks = domainModel.Tasks.ToViewModel(domainModel),
+                Sprint = domainModel.Sprint.ToViewModel()
+            };
+        }
+
+        public static View.Model.Sprint ToViewModel(this Domain.Model.Sprint sprint)
+        {
+            if(sprint== null) return null;
+            return new View.Model.Sprint
+            {
+                Id = sprint.Id,
+                Description = sprint.Description,
+                DisplayId = sprint.DisplayId,
+                Name = sprint.Description
             };
         }
         public static Board ToViewModel(this List<UserStory> domainModel, IPriority priority)
@@ -46,17 +59,7 @@ namespace StyrBoard.View.Repository.Mappings
                 if (column == null)
                     column = result.Columns.Single(s => s.Name == "Open");
 
-                column.Cards.Add(new Card()
-                {
-                    Id = userStory.Id,
-                    DisplayId = userStory.DisplayId,
-                    ColumnId = column.Id,
-                    Name = userStory.Title,
-                    Description = userStory.Description,
-                    Points = userStory.Points,
-                    Priority = priority.Get(userStory.Id),
-                    Tasks = userStory.Tasks.ToViewModel(userStory)
-                });
+                column.Cards.Add(userStory.ToViewModel(priority));
             }
 
             //sort the data

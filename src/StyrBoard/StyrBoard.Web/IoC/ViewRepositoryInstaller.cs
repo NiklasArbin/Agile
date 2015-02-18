@@ -12,6 +12,7 @@ namespace StyrBoard.Web.IoC
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
             container.Register(Component.For<IBoardRepository>().ImplementedBy<BoardRepository>());
+            container.Register(Component.For<IRepository<Sprint>>().ImplementedBy<SprintRepository>());
             container.Register(Component.For<IListRepository>().ImplementedBy<ListRepository>());
             container.Register(Component.For<IRepository<UserStory>>().ImplementedBy<UserStoryRepository>());
             container.Register(Component.For<ICardRepository>().ImplementedBy<CardRepository>());

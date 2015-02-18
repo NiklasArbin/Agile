@@ -17,7 +17,7 @@ namespace StyrBoard.Domain.Model
         public string Title { get; set; }
         public string Description { get; set; }
         public List<Task> Tasks { get; private set; }
-        public int SprintId { get; set; }
+        public Sprint Sprint { get; set; }
         public List<Impediment> Impediments { get; private set; }
         public State State { get; set; }
         public int Points { get; set; }
