@@ -2,6 +2,7 @@
 using System.Linq;
 using StyrBoard.Domain.Model;
 using StyrBoard.View.Model;
+using Board = StyrBoard.View.Model.Board;
 using Task = StyrBoard.View.Model.Task;
 
 
@@ -46,7 +47,7 @@ namespace StyrBoard.View.Repository.Mappings
                 Name = sprint.Description
             };
         }
-        public static Board ToViewModel(this List<UserStory> domainModel, IPriority priority)
+        public static View.Model.Board ToViewModel(this List<UserStory> domainModel, IPriority priority)
         {
             var result = new Board
             {

@@ -23,7 +23,7 @@ namespace StyrBoard.View.Repository
             var list = new List();
             using (var session = _documentStore.OpenSession())
             {
-                var userStories = session.Query<UserStory>().ToList();
+                var userStories = session.Query<UserStory>().Where(x=>x.Sprint == null || x.Sprint.Id == Guid.Empty).ToList();
                 list.Cards.AddRange(userStories.Select(x => x.ToViewModel(_priority)).OrderBy(x => x.Priority));
             }
             return list;

@@ -55,6 +55,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseRepository.cs" />
+    <Compile Include="BoardRepository.cs" />
     <Compile Include="BugRepository.cs" />
     <Compile Include="EpicRepository.cs" />
     <Compile Include="FeatureRepository.cs" />
